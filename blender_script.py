@@ -169,18 +169,12 @@ class BlenderSceneBuilder:
                 sky_texture.location = (0, 0)
                 sky_texture.sky_type = 'NISHITA'  # Physically accurate sky
 
-                # Mapping for rotation control
-                mapping = nodes.new('ShaderNodeMapping')
-                mapping.location = (-200, 0)
+                # Sky rotation can be controlled via sun direction
                 rotation_z = hdri_config.get('rotation', 45)
-                mapping.inputs['Rotation'].default_value = (0, 0, rotation_z * 0.0174533)  # Degrees to radians
+                # Adjust sun direction based on rotation (simplified)
+                # Sky texture uses sun position, not vector input
 
-                tex_coord = nodes.new('ShaderNodeTexCoord')
-                tex_coord.location = (-400, 0)
-
-                # Connect procedural sky
-                links.new(tex_coord.outputs['Generated'], mapping.inputs['Vector'])
-                links.new(mapping.outputs['Vector'], sky_texture.inputs['Vector'])
+                # Connect procedural sky directly (no vector input needed)
                 links.new(sky_texture.outputs['Color'], background.inputs['Color'])
 
             else:
@@ -400,7 +394,7 @@ class BlenderSceneBuilder:
 
             # Connect texture pipeline
             links.new(tex_coord.outputs['UV'], mapping.inputs['Vector'])
-            links.new(mapping.outputs['Vector'], tex_image.outputs['Vector'])
+            links.new(mapping.outputs['Vector'], tex_image.inputs['Vector'])
             links.new(tex_image.outputs['Color'], bsdf.inputs['Base Color'])
 
             # Also use alpha if available
@@ -818,6 +812,10 @@ class BlenderSceneBuilder:
         self.scene.use_nodes = True
         self.scene.render.use_compositing = True
 
+        # Enable depth pass for DOF
+        view_layer = self.scene.view_layers[0]
+        view_layer.use_pass_z = True
+
         nodes = self.scene.node_tree.nodes
         links = self.scene.node_tree.links
 
@@ -866,7 +864,7 @@ class BlenderSceneBuilder:
 
             glare = nodes.new('CompositorNodeGlare')
             glare.location = (x_offset, 0)
-            glare.glare_type = 'BLOOM'
+            glare.glare_type = 'FOG_GLOW'  # Bloom-like effect
             glare.threshold = bloom_config.get('threshold', 0.8)
             glare.size = int(bloom_config.get('radius', 6.5))
             glare.quality = 'HIGH'

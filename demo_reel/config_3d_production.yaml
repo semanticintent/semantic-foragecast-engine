@@ -28,7 +28,7 @@ video:
   codec: libx264
   quality: high  # CRF 18
   # Denoising
-  use_denoising: true
+  use_denoising: false  # Disabled (build without OpenImageDenoiser)
   denoiser: OPTIX  # GPU-accelerated (fallback to OPENIMAGEDENOISE if no GPU)
 
 style:
