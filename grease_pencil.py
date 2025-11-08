@@ -167,13 +167,16 @@ class GreasePencilBuilder:
             img_gray = img.convert('L')
             img_array = np.array(img_gray)
 
-            # Better edge detection using Sobel-like approach
+            # Better edge detection using Sobel-like approach (NumPy only)
             # Detect edges by finding areas with color changes
-            from scipy import ndimage
 
-            # Calculate gradients
-            dx = ndimage.sobel(img_array, axis=1)
-            dy = ndimage.sobel(img_array, axis=0)
+            # Sobel kernels for edge detection
+            sobel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+            sobel_y = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]])
+
+            # Apply Sobel filters using convolution
+            dx = self._convolve2d(img_array, sobel_x)
+            dy = self._convolve2d(img_array, sobel_y)
             edges = np.hypot(dx, dy)
 
             # Threshold to binary
@@ -232,7 +235,7 @@ class GreasePencilBuilder:
 
     def _find_contours(self, edges: np.ndarray, threshold: float) -> List[np.ndarray]:
         """
-        Improved contour finding using connected component analysis.
+        Improved contour finding using connected component analysis (NumPy only).
 
         Args:
             edges: Edge-detected image
@@ -241,10 +244,8 @@ class GreasePencilBuilder:
         Returns:
             List of contours (each is array of (x, y) points)
         """
-        from scipy import ndimage
-
-        # Find connected components in edge image
-        labeled, num_features = ndimage.label(edges > 128)
+        # Find connected components in edge image using NumPy-only implementation
+        labeled, num_features = self._connected_components(edges > 128)
 
         contours = []
         height, width = edges.shape
@@ -323,7 +324,9 @@ class GreasePencilBuilder:
             mat = bpy.data.materials.new(name=mat_name)
             bpy.data.materials.create_gpencil_data(mat)
 
-            # Set color
+            # Set color (convert RGB to RGBA if needed)
+            if len(color) == 3:
+                color = (color[0], color[1], color[2], 1.0)  # Add alpha
             mat.grease_pencil.color = color
 
         # Add material to object if not already there
@@ -331,6 +334,79 @@ class GreasePencilBuilder:
             gp_obj.data.materials.append(mat)
 
         return mat
+
+    def _convolve2d(self, image: np.ndarray, kernel: np.ndarray) -> np.ndarray:
+        """
+        Simple 2D convolution using NumPy only (no scipy).
+
+        Args:
+            image: Input image array
+            kernel: Convolution kernel
+
+        Returns:
+            Convolved image
+        """
+        k_height, k_width = kernel.shape
+        i_height, i_width = image.shape
+
+        # Pad the image
+        pad_h = k_height // 2
+        pad_w = k_width // 2
+        padded = np.pad(image, ((pad_h, pad_h), (pad_w, pad_w)), mode='edge')
+
+        # Initialize output
+        output = np.zeros_like(image, dtype=np.float32)
+
+        # Perform convolution
+        for i in range(i_height):
+            for j in range(i_width):
+                region = padded[i:i+k_height, j:j+k_width]
+                output[i, j] = np.sum(region * kernel)
+
+        return output
+
+    def _connected_components(self, binary_image: np.ndarray) -> tuple:
+        """
+        Find connected components using NumPy only (no scipy).
+        Uses a simple flood-fill approach.
+
+        Args:
+            binary_image: Binary image (True for foreground)
+
+        Returns:
+            (labeled_image, num_components)
+        """
+        labeled = np.zeros_like(binary_image, dtype=np.int32)
+        current_label = 0
+        height, width = binary_image.shape
+
+        def flood_fill(y, x, label):
+            """Flood fill using iterative approach (stack-based)"""
+            stack = [(y, x)]
+            while stack:
+                cy, cx = stack.pop()
+
+                if cy < 0 or cy >= height or cx < 0 or cx >= width:
+                    continue
+                if not binary_image[cy, cx] or labeled[cy, cx] != 0:
+                    continue
+
+                labeled[cy, cx] = label
+
+                # 8-connectivity
+                stack.extend([
+                    (cy-1, cx), (cy+1, cx), (cy, cx-1), (cy, cx+1),
+                    (cy-1, cx-1), (cy-1, cx+1), (cy+1, cx-1), (cy+1, cx+1)
+                ])
+
+        # Find connected components
+        for i in range(height):
+            for j in range(width):
+                if binary_image[i, j] and labeled[i, j] == 0:
+                    current_label += 1
+                    flood_fill(i, j, current_label)
+
+        return labeled, current_label
 
     def create_fallback_strokes(
         self,
