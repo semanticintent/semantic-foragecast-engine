@@ -1,0 +1,147 @@
+# Semantic Foragecast Engine - Configuration
+# Version: 1.0
+
+# Input files
+inputs:
+  # Path to mascot image (PNG/JPG, recommended ≥512x512)
+  mascot_image: "assets/fox.png"
+
+  # Path to song audio file (WAV/MP3, duration ≤60s)
+  song_file: "assets/song.wav"
+
+  # Path to lyrics file (TXT format: "0:00-0:05 Hello|world")
+  lyrics_file: "assets/lyrics.txt"
+
+# Video output settings
+output:
+  # Output directory for generated files
+  output_dir: "outputs"
+
+  # Final video filename
+  video_name: "final_video.mp4"
+
+  # Intermediate files directory
+  frames_dir: "outputs/frames"
+
+  # JSON prep data output
+  prep_json: "outputs/prep_data.json"
+
+# Video specifications
+video:
+  # Duration in seconds (will be auto-detected from audio)
+  duration: 30
+
+  # Resolution [width, height]
+  resolution: [1920, 1080]  # 1080p (use [3840, 2160] for 4K)
+
+  # Frame rate
+  fps: 24
+
+  # Render engine: "EEVEE" (fast) or "CYCLES" (quality)
+  render_engine: "EEVEE"
+
+  # Render samples (higher = better quality, slower)
+  samples: 128
+
+# Style configuration
+style:
+  # Lighting preset: "jazzy", "rock", "ambient", "disco"
+  lighting: "jazzy"
+
+  # Mascot variant (for future multi-mascot support)
+  mascot: "fox"
+
+  # Color scheme for effects
+  colors:
+    primary: [0.8, 0.3, 0.9]    # Purple (RGB 0-1)
+    secondary: [0.3, 0.8, 0.9]  # Cyan
+    accent: [0.9, 0.8, 0.3]     # Yellow
+
+  # Background type: "hdri", "solid", "gradient"
+  background: "hdri"
+
+  # HDRI file path (if background = "hdri")
+  hdri_path: null  # Will use default if null
+
+# Animation settings
+animation:
+  # Enable lip-sync animation
+  enable_lipsync: true
+
+  # Enable gesture animation (body movement)
+  enable_gestures: true
+
+  # Enable lyrics text overlay
+  enable_lyrics: true
+
+  # Enable stage effects (lights, particles)
+  enable_effects: true
+
+  # Gesture intensity (0.0 - 1.0)
+  gesture_intensity: 0.7
+
+  # Lyrics animation style: "bounce", "glow", "slide"
+  lyrics_style: "bounce"
+
+# Stage effects
+effects:
+  # Fog/atmosphere settings
+  fog:
+    enabled: true
+    density: 0.05
+
+  # Particle effects
+  particles:
+    enabled: true
+    count: 1000
+    type: "sparks"  # "sparks", "confetti", "snow"
+
+  # Lighting effects
+  lights:
+    # Pulsing spotlight
+    spotlight:
+      enabled: true
+      intensity: 500
+      color: [1.0, 0.9, 0.8]
+
+    # Random flashes synced to beats
+    flashes:
+      enabled: true
+      intensity_range: [5, 15]
+      random_colors: true
+
+# Rhubarb Lip Sync settings
+rhubarb:
+  # Path to Rhubarb executable (null = auto-detect)
+  executable_path: null
+
+  # Use mock phonemes if Rhubarb unavailable
+  use_mock_fallback: true
+
+# Advanced settings
+advanced:
+  # Preview mode (low-res, fast render)
+  preview_mode: false
+
+  # Preview resolution multiplier (0.5 = half res)
+  preview_scale: 0.5
+
+  # Keep intermediate files after render
+  keep_intermediate: false
+
+  # Verbose logging
+  verbose: true
+
+  # Number of CPU threads for rendering (null = auto)
+  threads: null
+
+# Blender settings
+blender:
+  # Path to Blender executable (null = auto-detect from PATH)
+  executable_path: null
+
+  # Run Blender in background (headless)
+  background: true
+
+  # Blender script to execute
+  script_path: "blender_script.py"

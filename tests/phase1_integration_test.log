@@ -1,0 +1,28 @@
+✓ Loaded configuration from: config.yaml
+ℹ Ensured directory exists: outputs
+ℹ Ensured directory exists: outputs/frames
+ℹ ✓ All input files validated
+ℹ ======================================================================
+ℹ PHASE 1: AUDIO PREPARATION
+ℹ ======================================================================
+ℹ Processing audio: assets/song.wav
+ℹ Processing lyrics: assets/lyrics.txt
+Processing audio: assets/song.wav
+  Duration: 30.00s, Sample Rate: 22050 Hz
+  Detecting beats and onsets...
+  WARNING: Beat tracking failed (module 'scipy.signal' has no attribute 'hann'), using onsets as beats
+  Found 59 beats, 59 onsets
+  Estimated tempo: 117.5 BPM
+  Extracting phonemes...
+WARNING: Rhubarb not found. Using mock phoneme data.
+  Found 201 phoneme transitions
+  Parsing lyrics: assets/lyrics.txt
+  Found 37 timed words
+
+Results saved to: outputs/prep_data.json
+ℹ ✓ Phase 1 complete
+ℹ   Audio: 30.0s @ 117.5 BPM
+ℹ   Beats: 59
+ℹ   Phonemes: 201
+ℹ   Words: 37
+ℹ 
