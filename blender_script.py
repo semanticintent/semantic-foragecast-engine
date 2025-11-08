@@ -24,6 +24,11 @@ import argparse
 from pathlib import Path
 from typing import Dict, List
 
+# Add script directory to Python path for module imports
+script_dir = os.path.dirname(os.path.abspath(__file__))
+if script_dir not in sys.path:
+    sys.path.insert(0, script_dir)
+
 # Check if running in Blender
 try:
     import bpy
@@ -559,12 +564,21 @@ def main():
     print("To enable rendering, uncomment render code in blender_script.py")
     print()
 
-    # Uncomment to actually render:
-    # if animation_mode in ['2d_grease', 'hybrid']:
-    #     # Render with EEVEE for speed
-    #     bpy.ops.render.render(animation=True)
-    # else:
-    #     # builder.render_animation()
+    # Render the animation
+    print("\n" + "="*70)
+    print("RENDERING ANIMATION")
+    print("="*70)
+
+    if animation_mode in ['2d_grease', 'hybrid']:
+        # Render with EEVEE for speed
+        print("Rendering 2D/Hybrid animation with EEVEE...")
+        bpy.ops.render.render(animation=True)
+    else:
+        # Render 3D animation
+        print("Rendering 3D animation...")
+        builder.render_animation()
+
+    print("\n✓ Rendering complete!")
 
     return 0
 
