@@ -759,15 +759,23 @@ class BlenderSceneBuilder:
                     print("  GPU not available, using CPU")
 
             # Denoising
-            if video_config.get('use_denoising', True):
-                self.scene.cycles.use_denoising = True
-                denoiser = video_config.get('denoiser', 'OPTIX')
-                if hasattr(self.scene.cycles, 'denoiser'):
-                    try:
-                        self.scene.cycles.denoiser = denoiser
-                        print(f"  Denoiser: {denoiser}")
-                    except:
-                        print("  Using default denoiser")
+            if video_config.get('use_denoising', False):
+                try:
+                    self.scene.cycles.use_denoising = True
+                    denoiser = video_config.get('denoiser', 'OPTIX')
+                    if hasattr(self.scene.cycles, 'denoiser'):
+                        try:
+                            self.scene.cycles.denoiser = denoiser
+                            print(f"  Denoiser: {denoiser}")
+                        except:
+                            print("  Using default denoiser")
+                except Exception as e:
+                    print(f"  Denoising not available: {e}")
+                    self.scene.cycles.use_denoising = False
+            else:
+                # Explicitly disable denoising
+                self.scene.cycles.use_denoising = False
+                print("  Denoising disabled")
 
             # Persistent data for faster rendering
             if video_config.get('persistent_data', True):
