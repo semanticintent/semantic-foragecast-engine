@@ -1,0 +1,157 @@
+# Production Quality 3D Pipeline Configuration
+# Target: Pixar/Sony-level output quality
+
+inputs:
+  mascot_image: demo_reel/assets/demo_fox.png
+  song_file: demo_reel/assets/demo_song.wav
+  lyrics_file: demo_reel/assets/demo_lyrics.txt
+
+output:
+  output_dir: demo_reel/3d_production
+  video_name: 3d_production_demo.mp4
+  frames_dir: demo_reel/3d_production/frames
+  prep_json: demo_reel/3d_production/prep_data.json
+
+video:
+  duration: 10
+  # Production: 4K resolution
+  resolution: [3840, 2160]
+  fps: 24
+  # Cycles for photorealistic quality
+  render_engine: CYCLES
+  # High sample count for clean renders
+  samples: 256
+  # Enable production features
+  motion_blur: true
+  motion_blur_shutter: 0.5
+  # Video encoding
+  codec: libx264
+  quality: high  # CRF 18
+  # Denoising
+  use_denoising: true
+  denoiser: OPTIX  # GPU-accelerated (fallback to OPENIMAGEDENOISE if no GPU)
+
+style:
+  lighting: production  # HDRI-based lighting
+  mascot: fox
+  # Professional color palette
+  colors:
+    primary: [0.95, 0.4, 0.2]     # Warm orange
+    secondary: [0.2, 0.3, 0.5]    # Cool blue
+    accent: [0.95, 0.85, 0.3]     # Golden yellow
+  background: hdri  # HDRI environment
+  stage: true  # Add stage/floor
+
+animation:
+  mode: 3d
+  enable_lipsync: true
+  enable_gestures: true
+  enable_lyrics: true
+  enable_effects: true
+  gesture_intensity: 0.6
+  lyrics_style: professional  # Styled 3D text
+
+effects:
+  # Volumetric fog for atmosphere
+  fog:
+    enabled: true
+    density: 0.02
+    height: 3.0
+  # Particle effects
+  particles:
+    enabled: true
+    count: 1000
+    type: sparkles
+    emit_on_beats: true
+  # Professional lighting
+  lights:
+    hdri:
+      enabled: true
+      strength: 1.5
+      rotation: 45
+      # Fallback to procedural if no HDRI available
+      fallback_color: [0.8, 0.9, 1.0]
+    spotlight:
+      enabled: true
+      intensity: 1000
+      color: [1.0, 0.98, 0.95]
+      spot_size: 60
+      spot_blend: 0.3
+    rim_light:
+      enabled: true
+      intensity: 500
+      color: [0.3, 0.5, 1.0]
+    flashes:
+      enabled: true
+      intensity_range: [15, 25]
+      random_colors: true
+
+materials:
+  # PBR material settings
+  mascot:
+    type: pbr
+    roughness: 0.4
+    metallic: 0.0
+    specular: 0.5
+    subsurface: 0.05  # Slight SSS for organic look
+    sheen: 0.2  # Fur-like sheen
+  text:
+    type: emission_glossy
+    emission_strength: 2.0
+    roughness: 0.1
+    metallic: 0.3
+  stage:
+    type: pbr
+    roughness: 0.7
+    metallic: 0.0
+    color: [0.15, 0.15, 0.18]
+
+compositor:
+  enabled: true
+  # Depth of field
+  dof:
+    enabled: true
+    f_stop: 2.8
+    focus_distance: 5.0
+  # Bloom for glowy effects
+  bloom:
+    enabled: true
+    threshold: 0.8
+    intensity: 0.05
+    radius: 6.5
+  # Color grading
+  color_grading:
+    enabled: true
+    temperature: 1.05  # Slightly warm
+    saturation: 1.15   # Boost saturation
+    contrast: 1.1
+    gamma: 1.0
+  # Vignette
+  vignette:
+    enabled: true
+    amount: 0.3
+  # Film grain for cinematic look
+  film_grain:
+    enabled: true
+    amount: 0.02
+
+rhubarb:
+  executable_path: null
+  use_mock_fallback: true
+
+advanced:
+  preview_mode: false
+  preview_scale: 1.0
+  keep_intermediate: true
+  verbose: true
+  threads: null  # Use all available cores
+  # Performance optimizations
+  tile_size: 256
+  use_gpu: true
+  # Persistent data (faster multi-frame renders)
+  persistent_data: true
+
+blender:
+  executable_path: null
+  background: true
+  script_path: blender_script.py
