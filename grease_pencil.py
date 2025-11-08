@@ -160,13 +160,25 @@ class GreasePencilBuilder:
             from PIL import Image
             img = Image.open(image_path)
 
+            # Convert to RGB array to preserve colors
+            img_rgb = np.array(img.convert('RGB'))
+
             # Convert to grayscale for edge detection
             img_gray = img.convert('L')
             img_array = np.array(img_gray)
 
-            # Simple edge detection (threshold)
-            threshold = 128
-            edges = (img_array < threshold).astype(np.uint8) * 255
+            # Better edge detection using Sobel-like approach
+            # Detect edges by finding areas with color changes
+            from scipy import ndimage
+
+            # Calculate gradients
+            dx = ndimage.sobel(img_array, axis=1)
+            dy = ndimage.sobel(img_array, axis=0)
+            edges = np.hypot(dx, dy)
+
+            # Threshold to binary
+            edge_threshold = np.mean(edges) + np.std(edges)
+            edges = (edges > edge_threshold).astype(np.uint8) * 255
 
             # Find contours using NumPy
             contours = self._find_contours(edges, simplify_threshold)
@@ -187,9 +199,16 @@ class GreasePencilBuilder:
                 if len(contour) < 3:  # Skip tiny contours
                     continue
 
+                # Extract color from this contour region
+                contour_color = self._extract_contour_color(img_rgb, contour)
+
+                # Create or get material for this color
+                mat = self._get_or_create_gp_material(gp_obj, contour_color, i)
+
                 # Create stroke
                 stroke = frame.strokes.new()
                 stroke.line_width = self.stroke_thickness
+                stroke.material_index = gp_obj.data.materials.find(mat.name)
 
                 # Add points
                 stroke.points.add(len(contour))
@@ -203,7 +222,7 @@ class GreasePencilBuilder:
                     stroke.points[j].co = (scene_x, scene_y, scene_z)
                     stroke.points[j].pressure = 1.0
 
-            print(f"✓ Created {len(frame.strokes)} strokes")
+            print(f"✓ Created {len(frame.strokes)} strokes with colors")
 
             return layer
 
@@ -213,7 +232,7 @@ class GreasePencilBuilder:
 
     def _find_contours(self, edges: np.ndarray, threshold: float) -> List[np.ndarray]:
         """
-        Simple contour finding using NumPy (basic implementation).
+        Improved contour finding using connected component analysis.
 
         Args:
             edges: Edge-detected image
@@ -222,30 +241,96 @@ class GreasePencilBuilder:
         Returns:
             List of contours (each is array of (x, y) points)
         """
-        # Very basic contour extraction
-        # For production, consider using OpenCV if available
-        contours = []
+        from scipy import ndimage
 
-        # Find connected components (simplified)
+        # Find connected components in edge image
+        labeled, num_features = ndimage.label(edges > 128)
+
+        contours = []
         height, width = edges.shape
 
-        # Sample points from edges
-        edge_points = np.argwhere(edges > 128)
+        # Extract each connected component as a contour
+        for label_id in range(1, min(num_features + 1, 51)):  # Limit to 50 contours
+            # Get all pixels for this component
+            component_mask = (labeled == label_id)
+            edge_points = np.argwhere(component_mask)
 
-        if len(edge_points) == 0:
-            return contours
+            if len(edge_points) < 5:  # Skip tiny components
+                continue
 
-        # Group nearby points into contours (simplified)
-        # This is a basic implementation - real production would use proper contour tracing
-        step = max(1, len(edge_points) // 100)  # Limit to ~100 contours
-        for i in range(0, len(edge_points), step):
-            contour_points = edge_points[i:min(i + 50, len(edge_points))]
-            if len(contour_points) > 2:
-                # Convert from (row, col) to (x, y)
-                contour = np.column_stack((contour_points[:, 1], contour_points[:, 0]))
-                contours.append(contour)
+            # Sort points to create a path (simple approach: sort by angle from centroid)
+            centroid = edge_points.mean(axis=0)
+            angles = np.arctan2(edge_points[:, 0] - centroid[0],
+                              edge_points[:, 1] - centroid[1])
+            sorted_indices = np.argsort(angles)
+            sorted_points = edge_points[sorted_indices]
 
-        return contours[:50]  # Limit total contours
+            # Simplify by taking every Nth point
+            simplify_step = max(1, len(sorted_points) // 50)
+            simplified_points = sorted_points[::simplify_step]
+
+            # Convert from (row, col) to (x, y)
+            contour = np.column_stack((simplified_points[:, 1], simplified_points[:, 0]))
+            contours.append(contour)
+
+        return contours
+
+    def _extract_contour_color(self, img_rgb: np.ndarray, contour: np.ndarray) -> tuple:
+        """
+        Extract dominant color from image region around contour.
+
+        Args:
+            img_rgb: RGB image array
+            contour: Array of (x, y) points
+
+        Returns:
+            RGB color tuple (0-1 range)
+        """
+        # Sample colors from contour points
+        colors = []
+        for x, y in contour:
+            x_int, y_int = int(x), int(y)
+            if 0 <= y_int < img_rgb.shape[0] and 0 <= x_int < img_rgb.shape[1]:
+                colors.append(img_rgb[y_int, x_int])
+
+        if len(colors) == 0:
+            return (0.5, 0.5, 0.5)  # Default gray
+
+        # Calculate average color
+        avg_color = np.mean(colors, axis=0) / 255.0  # Normalize to 0-1
+        return tuple(avg_color)
+
+    def _get_or_create_gp_material(self, gp_obj: bpy.types.Object, color: tuple, index: int):
+        """
+        Get or create a Grease Pencil material with specified color.
+
+        Args:
+            gp_obj: GP object
+            color: RGB color tuple (0-1 range)
+            index: Material index for naming
+
+        Returns:
+            Blender material
+        """
+        import bpy
+
+        mat_name = f"GPMat_{index}"
+
+        # Check if material already exists
+        mat = bpy.data.materials.get(mat_name)
+        if mat is None:
+            # Create new material
+            mat = bpy.data.materials.new(name=mat_name)
+            bpy.data.materials.create_gpencil_data(mat)
+
+            # Set color
+            mat.grease_pencil.color = color
+
+        # Add material to object if not already there
+        if mat.name not in gp_obj.data.materials:
+            gp_obj.data.materials.append(mat)
+
+        return mat
 
     def create_fallback_strokes(
         self,
