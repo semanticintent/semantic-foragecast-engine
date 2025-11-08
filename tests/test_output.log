@@ -1,0 +1,61 @@
+======================================================================
+PREP_AUDIO.PY UNIT TESTS
+======================================================================
+
+test_generate_mock_wav (__main__.TestMockAudioGeneration.test_generate_mock_wav)
+Generate a 5-second test tone WAV file. ... ✓ Generated mock WAV: 5.0s, 22050Hz, 220544 bytes
+ok
+test_detect_beats (__main__.TestAudioPreprocessor.test_detect_beats)
+Test beat and onset detection. ...   WARNING: Beat tracking failed (module 'scipy.signal' has no attribute 'hann'), using onsets as beats
+✓ Detected 10 beats, 10 onsets
+  Tempo: 123.0 BPM
+ok
+test_load_audio (__main__.TestAudioPreprocessor.test_load_audio)
+Test audio file loading. ... ✓ Loaded audio: 110250 samples, 22050Hz
+ok
+test_extract_phonemes_mock (__main__.TestPhonemeExtractor.test_extract_phonemes_mock)
+Test mock phoneme generation (when Rhubarb unavailable). ... WARNING: Rhubarb not found. Using mock phoneme data.
+✓ Generated 21 mock phonemes
+  Sample: [{'time': 0.0, 'phoneme': 'X'}, {'time': 0.15, 'phoneme': 'A'}, {'time': 0.3, 'phoneme': 'B'}]
+ok
+test_parse_piped_format (__main__.TestLyricsParser.test_parse_piped_format)
+Test parsing of pipe-delimited lyrics. ... ✓ Parsed 11 timed words
+  Sample: [{'start': 0.0, 'end': 0.83, 'word': 'Hello'}, {'start': 0.83, 'end': 1.67, 'word': 'world'}, {'start': 1.67, 'end': 2.5, 'word': 'this'}]
+ok
+test_parse_timestamp (__main__.TestLyricsParser.test_parse_timestamp)
+Test timestamp parsing. ... ✓ Timestamp parsing works correctly
+ok
+test_full_pipeline (__main__.TestIntegration.test_full_pipeline)
+Test complete audio processing pipeline. ... Processing audio: /tmp/tmpx8y1330u.wav
+  Duration: 5.00s, Sample Rate: 22050 Hz
+  Detecting beats and onsets...
+  WARNING: Beat tracking failed (module 'scipy.signal' has no attribute 'hann'), using onsets as beats
+  Found 9 beats, 9 onsets
+  Estimated tempo: 123.0 BPM
+  Extracting phonemes...
+WARNING: Rhubarb not found. Using mock phoneme data.
+  Found 34 phoneme transitions
+  Parsing lyrics: /tmp/tmp0jg3xpsv.txt
+  Found 4 timed words
+
+Results saved to: /tmp/tmpmdd_9alx.json
+✓ Full pipeline integration test passed
+  Audio: 5.0s, 123.0 BPM
+  Beats: 9
+  Phonemes: 34
+  Words: 4
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.190s
+
+OK
+
+======================================================================
+TEST SUMMARY
+======================================================================
+Tests run: 7
+Failures: 0
+Errors: 0
+Success rate: 100.0%
+======================================================================
