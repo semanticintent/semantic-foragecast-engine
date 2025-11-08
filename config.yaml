@@ -43,6 +43,12 @@ video:
   # Render samples (higher = better quality, slower)
   samples: 128
 
+  # Video encoding codec: "libx264" (H.264), "libx265" (H.265/HEVC), "vp9" (VP9)
+  codec: "libx264"
+
+  # Encoding quality: "low", "medium", "high", "ultra"
+  quality: "high"
+
 # Style configuration
 style:
   # Lighting preset: "jazzy", "rock", "ambient", "disco"

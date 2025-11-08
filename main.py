@@ -27,6 +27,7 @@ import shutil
 import yaml
 
 from prep_audio import process_audio
+from export_video import VideoExporter, export_video_from_config
 
 
 class PipelineOrchestrator:
@@ -266,17 +267,45 @@ class PipelineOrchestrator:
         except subprocess.TimeoutExpired:
             raise Exception("Blender execution timed out (>10 minutes)")
 
-    def phase3_export_video(self):
+    def phase3_export_video(self, prep_data: Optional[Dict] = None):
         """
         Execute Phase 3: Video export with FFmpeg.
 
-        Note: This is a placeholder for future implementation.
+        Args:
+            prep_data: Optional preprocessed audio data
         """
         self._log("=" * 70)
         self._log("PHASE 3: VIDEO EXPORT")
         self._log("=" * 70)
-        self._log("Phase 3 (FFmpeg export) not yet implemented", "WARNING")
-        self._log("Frames should be available in: " + self.config.get('output', {}).get('frames_dir', 'outputs/frames'))
+
+        # Check if frames exist
+        frames_dir = self.config.get('output', {}).get('frames_dir', 'outputs/frames')
+        exporter = VideoExporter(self.config)
+
+        frames_exist, frame_count = exporter.validate_frames(frames_dir)
+
+        if not frames_exist:
+            self._log("WARNING: No rendered frames found. Skipping video export.", "WARNING")
+            self._log(f"  Expected frames in: {frames_dir}", "WARNING")
+            self._log("  Run Phase 2 (Blender) first to generate frames.", "WARNING")
+            self._log("")
+            return
+
+        self._log(f"Found {frame_count} frames in {frames_dir}")
+
+        # Export video
+        success = export_video_from_config(self.config, prep_data)
+
+        if success:
+            self._log("✓ Phase 3 complete")
+            output_dir = self.config.get('output', {}).get('output_dir', 'outputs')
+            video_name = self.config.get('output', {}).get('video_name', 'final_video.mp4')
+            output_path = os.path.join(output_dir, video_name)
+            self._log(f"  Video: {output_path}")
+        else:
+            self._log("Phase 3 failed", "ERROR")
+            raise Exception("Video export failed")
+
         self._log("")
 
     def run(self):
@@ -297,8 +326,8 @@ class PipelineOrchestrator:
             # Phase 2: Blender
             self.phase2_blender_animation(prep_data)
 
-            # Phase 3: Export (placeholder)
-            self.phase3_export_video()
+            # Phase 3: Export
+            self.phase3_export_video(prep_data)
 
             self._log("=" * 70)
             self._log("✓ PIPELINE COMPLETE")
@@ -393,7 +422,13 @@ For more information, see README.md
                     prep_data = json.load(f)
                 orchestrator.phase2_blender_animation(prep_data)
             elif args.phase == 3:
-                orchestrator.phase3_export_video()
+                # Load prep data if available
+                prep_json = orchestrator.config.get('output', {}).get('prep_json', 'outputs/prep_data.json')
+                prep_data = None
+                if os.path.exists(prep_json):
+                    with open(prep_json, 'r') as f:
+                        prep_data = json.load(f)
+                orchestrator.phase3_export_video(prep_data)
 
             return 0
 
