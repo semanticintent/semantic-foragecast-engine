@@ -56,3 +56,8 @@ outputs/frames/
 # Exclude large rendered frame directories
 demo_reel/*/frames/
 outputs/*/frames/
+
+# Exclude generated output files
+demo_reel/*/prep_data.json
+demo_reel/*/*.mp4
+demo_reel/*/*.avi
