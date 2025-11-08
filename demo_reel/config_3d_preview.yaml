@@ -1,0 +1,110 @@
+# Quick preview config for testing production features
+# Lower resolution and samples for faster rendering
+
+inputs:
+  mascot_image: demo_reel/assets/demo_fox.png
+  song_file: demo_reel/assets/demo_song.wav
+  lyrics_file: demo_reel/assets/demo_lyrics.txt
+
+output:
+  output_dir: demo_reel/3d_preview
+  video_name: preview.mp4
+  frames_dir: demo_reel/3d_preview/frames
+  prep_json: demo_reel/3d_preview/prep_data.json
+
+video:
+  resolution: [1280, 720]  # 720p for preview
+  fps: 24
+  render_engine: CYCLES
+  samples: 32  # Lower samples for faster preview
+  use_gpu: true
+  persistent_data: true
+  # Motion blur
+  motion_blur: true
+  motion_blur_shutter: 0.5
+  # Video encoding
+  codec: libx264
+  quality: high
+  # Denoising
+  use_denoising: false
+
+style:
+  lighting: production
+  mascot: fox
+  stage: true
+  colors:
+    primary: [0.95, 0.4, 0.2]    # Orange
+    secondary: [0.2, 0.6, 0.9]   # Blue
+    accent: [0.95, 0.85, 0.3]    # Yellow
+
+animation:
+  mode: 3d  # Use 3D mesh
+  enable_lyrics: true
+  lyrics_style: professional
+
+# Production-quality effects (enabled for preview)
+effects:
+  lights:
+    flashes:
+      enabled: true
+      intensity: 2.0
+    hdri:
+      enabled: true
+      strength: 1.5
+      rotation: 45
+      fallback_color: [0.8, 0.9, 1.0]
+    spotlight:
+      enabled: true
+      intensity: 1000
+      spot_size: 60
+      spot_blend: 0.3
+      color: [1.0, 0.98, 0.95]
+    rim_light:
+      enabled: true
+      intensity: 500
+      color: [0.3, 0.5, 1.0]
+
+# PBR Materials
+materials:
+  mascot:
+    type: pbr
+    roughness: 0.4
+    metallic: 0.0
+    specular: 0.5
+    subsurface: 0.05
+    sheen: 0.2
+  text:
+    type: emission_glossy
+    emission_strength: 2.0
+    roughness: 0.1
+    metallic: 0.3
+  stage:
+    type: pbr
+    color: [0.15, 0.15, 0.18]
+    roughness: 0.7
+    metallic: 0.0
+
+# Compositor effects (same as production)
+compositor:
+  enabled: true
+  dof:
+    enabled: true
+    f_stop: 2.8
+    focus_distance: 5.0
+  bloom:
+    enabled: true
+    threshold: 0.8
+    radius: 6.5
+    intensity: 0.05
+  color_grading:
+    enabled: true
+    temperature: 1.05
+    saturation: 1.15
+    contrast: 1.1
+    gamma: 1.0
+  vignette:
+    enabled: true
+    amount: 0.3
+  film_grain:
+    enabled: true
+    amount: 0.02
