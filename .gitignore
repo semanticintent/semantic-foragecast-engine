@@ -52,3 +52,7 @@ outputs/frames/
 # Blender
 *.blend1
 *.blend2
+
+# Exclude large rendered frame directories
+demo_reel/*/frames/
+outputs/*/frames/
