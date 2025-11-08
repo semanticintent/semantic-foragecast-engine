@@ -1,0 +1,2762 @@
+✓ Loaded configuration from: demo_reel/config_2d_grease.yaml
+ℹ ======================================================================
+ℹ SEMANTIC FORAGECAST ENGINE - VIDEO PIPELINE
+ℹ ======================================================================
+ℹ 
+ℹ Ensured directory exists: demo_reel/2d_grease
+ℹ Ensured directory exists: demo_reel/2d_grease/frames
+ℹ ✓ All input files validated
+ℹ ======================================================================
+ℹ PHASE 1: AUDIO PREPARATION
+ℹ ======================================================================
+ℹ Processing audio: demo_reel/assets/demo_song.wav
+ℹ Processing lyrics: demo_reel/assets/demo_lyrics.txt
+Processing audio: demo_reel/assets/demo_song.wav
+  Duration: 10.00s, Sample Rate: 22050 Hz
+  Detecting beats and onsets...
+  WARNING: Beat tracking failed (module 'scipy.signal' has no attribute 'hann'), using onsets as beats
+  Found 27 beats, 27 onsets
+  Estimated tempo: 184.6 BPM
+  Extracting phonemes...
+WARNING: Rhubarb not found. Using mock phoneme data.
+  Found 67 phoneme transitions
+  Parsing lyrics: demo_reel/assets/demo_lyrics.txt
+  Found 11 timed words
+
+Results saved to: demo_reel/2d_grease/prep_data.json
+ℹ ✓ Phase 1 complete
+ℹ   Audio: 10.0s @ 184.6 BPM
+ℹ   Beats: 27
+ℹ   Phonemes: 67
+ℹ   Words: 11
+ℹ 
+ℹ ======================================================================
+ℹ PHASE 2: BLENDER ANIMATION
+ℹ ======================================================================
+ℹ Blender executable: /usr/bin/blender
+ℹ Executing: /usr/bin/blender --background --python blender_script.py -- --config demo_reel/config_2d_grease.yaml --prep-data demo_reel/2d_grease/prep_data.json
+Blender 4.0.2
+======================================================================
+BLENDER SCENE BUILDER - PHASE 2
+======================================================================
+
+Loading config: demo_reel/config_2d_grease.yaml
+Loading prep data: demo_reel/2d_grease/prep_data.json
+
+Animation Mode: 2d_grease
+
+======================================================================
+BUILDING 2D GREASE PENCIL SCENE
+======================================================================
+
+Grease Pencil Builder initialized: 240 frames @ 24 fps
+Style: stroke_thickness=4, ink=sketchy
+Clearing scene for Grease Pencil...
+✓ Scene cleared for GP
+Setting up 2D camera...
+✓ 2D camera configured: 1920x1080, orthographic
+Setting up 2D lighting...
+✓ 2D lighting configured
+Converting image to strokes: demo_reel/assets/demo_fox.png
+ERROR: Image-to-stroke conversion failed: No module named 'scipy'
+Creating fallback strokes (simple mascot)...
+✓ Created fallback strokes
+Creating mouth shape variations for phonemes...
+✓ Configured 9 phoneme shapes
+Animating lip-sync with GP...
+✓ Lip-sync animated with 67 phonemes
+Adding beat-synced gestures...
+✓ Added beat gestures for 27 beats
+Creating lyric text strokes...
+✓ Created 11 lyric stroke objects
+Configuring GP render settings...
+✓ GP render settings configured
+  Output: demo_reel/2d_grease/frames/frame_####.png
+
+======================================================================
+2D SCENE SETUP COMPLETE
+======================================================================
+
+✓ 2D Grease Pencil scene built successfully
+
+======================================================================
+SCENE SETUP COMPLETE
+======================================================================
+
+Mode: 2d_grease
+Phase 2 (Blender) complete!
+Full rendering disabled in stub mode.
+To enable rendering, uncomment render code in blender_script.py
+
+
+======================================================================
+RENDERING ANIMATION
+======================================================================
+Rendering 2D/Hybrid animation with EEVEE...
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:07.68 | Syncing GP_Camera
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:07.68 | Syncing GP_Light
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:07.68 | Syncing Mascot_GP
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:07.68 | Syncing Lyric_Welcome
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:07.72 | Rendering 1 / 64 samples
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:08.71 | Rendering 26 / 64 samples
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:09.10 | Rendering 51 / 64 samples
+Fra:1 Mem:43.79M (Peak 44.88M) | Time:00:09.31 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0001.png'
+Time: 00:10.02 (Saving: 00:00.36)
+
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:2 Mem:44.02M (Peak 112.56M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0002.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:3 Mem:44.02M (Peak 112.56M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0003.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:4 Mem:44.02M (Peak 112.56M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0004.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:5 Mem:44.02M (Peak 112.56M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0005.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:00.85 | Rendering 51 / 64 samples
+Fra:6 Mem:44.02M (Peak 112.56M) | Time:00:01.03 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0006.png'
+Time: 00:01.37 (Saving: 00:00.16)
+
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing GP_Camera
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing GP_Light
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing Mascot_GP
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing Lyric_Welcome
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.09 | Rendering 1 / 64 samples
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.41 | Rendering 26 / 64 samples
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.74 | Rendering 51 / 64 samples
+Fra:7 Mem:44.02M (Peak 112.56M) | Time:00:00.92 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0007.png'
+Time: 00:01.28 (Saving: 00:00.17)
+
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing GP_Camera
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing GP_Light
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing Mascot_GP
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing Lyric_Welcome
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.09 | Rendering 1 / 64 samples
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:00.81 | Rendering 51 / 64 samples
+Fra:8 Mem:44.02M (Peak 112.56M) | Time:00:01.00 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0008.png'
+Time: 00:01.37 (Saving: 00:00.17)
+
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:00.56 | Rendering 26 / 64 samples
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:01.04 | Rendering 51 / 64 samples
+Fra:9 Mem:44.02M (Peak 112.56M) | Time:00:01.28 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0009.png'
+Time: 00:01.69 (Saving: 00:00.18)
+
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Welcome
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:00.63 | Rendering 26 / 64 samples
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:01.13 | Rendering 51 / 64 samples
+Fra:10 Mem:44.02M (Peak 112.56M) | Time:00:01.39 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0010.png'
+Time: 00:01.79 (Saving: 00:00.18)
+
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Welcome
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:00.12 | Rendering 1 / 64 samples
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:00.62 | Rendering 26 / 64 samples
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:01.02 | Rendering 51 / 64 samples
+Fra:11 Mem:44.02M (Peak 112.56M) | Time:00:01.22 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0011.png'
+Time: 00:01.59 (Saving: 00:00.16)
+
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:12 Mem:44.02M (Peak 112.56M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0012.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:00.81 | Rendering 51 / 64 samples
+Fra:13 Mem:44.02M (Peak 112.56M) | Time:00:01.00 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0013.png'
+Time: 00:01.36 (Saving: 00:00.17)
+
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.81 | Rendering 51 / 64 samples
+Fra:14 Mem:44.02M (Peak 112.56M) | Time:00:00.98 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0014.png'
+Time: 00:01.32 (Saving: 00:00.16)
+
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing GP_Camera
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing GP_Light
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing Mascot_GP
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.05 | Syncing Lyric_Welcome
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.09 | Rendering 1 / 64 samples
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.42 | Rendering 26 / 64 samples
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.74 | Rendering 51 / 64 samples
+Fra:15 Mem:44.02M (Peak 112.56M) | Time:00:00.91 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0015.png'
+Time: 00:01.27 (Saving: 00:00.16)
+
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:16 Mem:44.02M (Peak 112.56M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0016.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:17 Mem:44.02M (Peak 112.56M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0017.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Welcome
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:18 Mem:44.02M (Peak 112.56M) | Time:00:01.03 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0018.png'
+Time: 00:01.40 (Saving: 00:00.17)
+
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:19 Mem:44.02M (Peak 112.56M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0019.png'
+Time: 00:01.47 (Saving: 00:00.18)
+
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:20 Mem:44.02M (Peak 112.56M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0020.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:21 Mem:44.02M (Peak 112.56M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0021.png'
+Time: 00:01.46 (Saving: 00:00.16)
+
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:22 Mem:44.02M (Peak 112.56M) | Time:00:01.03 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0022.png'
+Time: 00:01.40 (Saving: 00:00.17)
+
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:00.83 | Rendering 51 / 64 samples
+Fra:23 Mem:44.02M (Peak 112.56M) | Time:00:01.02 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0023.png'
+Time: 00:01.38 (Saving: 00:00.17)
+
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:00.83 | Rendering 51 / 64 samples
+Fra:24 Mem:44.02M (Peak 112.56M) | Time:00:01.03 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0024.png'
+Time: 00:01.40 (Saving: 00:00.16)
+
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:25 Mem:44.02M (Peak 112.56M) | Time:00:01.07 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0025.png'
+Time: 00:01.46 (Saving: 00:00.18)
+
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:26 Mem:44.02M (Peak 112.56M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0026.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:27 Mem:44.02M (Peak 112.56M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0027.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:28 Mem:44.02M (Peak 112.56M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0028.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:29 Mem:44.02M (Peak 112.56M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0029.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:30 Mem:44.02M (Peak 112.56M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0030.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:31 Mem:44.02M (Peak 112.56M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0031.png'
+Time: 00:01.51 (Saving: 00:00.18)
+
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_to
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.55 | Rendering 26 / 64 samples
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:32 Mem:44.02M (Peak 112.56M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0032.png'
+Time: 00:01.56 (Saving: 00:00.18)
+
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:33 Mem:44.02M (Peak 112.56M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0033.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:34 Mem:44.02M (Peak 112.56M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0034.png'
+Time: 00:01.45 (Saving: 00:00.16)
+
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:35 Mem:44.02M (Peak 112.56M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0035.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_to
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:36 Mem:44.02M (Peak 112.56M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0036.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:37 Mem:44.02M (Peak 112.56M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0037.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:01.04 | Rendering 51 / 64 samples
+Fra:38 Mem:44.03M (Peak 112.56M) | Time:00:01.29 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0038.png'
+Time: 00:01.68 (Saving: 00:00.18)
+
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Semantic
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.58 | Rendering 26 / 64 samples
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:00.97 | Rendering 51 / 64 samples
+Fra:39 Mem:44.03M (Peak 112.56M) | Time:00:01.19 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0039.png'
+Time: 00:01.57 (Saving: 00:00.17)
+
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:00.15 | Syncing GP_Camera
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:00.15 | Syncing GP_Light
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:00.15 | Syncing Mascot_GP
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:00.15 | Syncing Lyric_Semantic
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:00.20 | Rendering 1 / 64 samples
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:00.66 | Rendering 26 / 64 samples
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:01.13 | Rendering 51 / 64 samples
+Fra:40 Mem:44.03M (Peak 112.56M) | Time:00:01.36 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0040.png'
+Time: 00:01.76 (Saving: 00:00.18)
+
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:41 Mem:44.03M (Peak 112.56M) | Time:00:01.05 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0041.png'
+Time: 00:01.42 (Saving: 00:00.17)
+
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.81 | Rendering 51 / 64 samples
+Fra:42 Mem:44.03M (Peak 112.56M) | Time:00:00.98 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0042.png'
+Time: 00:01.33 (Saving: 00:00.17)
+
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:00.85 | Rendering 51 / 64 samples
+Fra:43 Mem:44.03M (Peak 112.56M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0043.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:44 Mem:44.03M (Peak 112.56M) | Time:00:01.20 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0044.png'
+Time: 00:01.61 (Saving: 00:00.18)
+
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Semantic
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:00.62 | Rendering 26 / 64 samples
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:01.11 | Rendering 51 / 64 samples
+Fra:45 Mem:44.03M (Peak 112.56M) | Time:00:01.36 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0045.png'
+Time: 00:01.77 (Saving: 00:00.18)
+
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Semantic
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:00.64 | Rendering 26 / 64 samples
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:01.12 | Rendering 51 / 64 samples
+Fra:46 Mem:44.03M (Peak 112.56M) | Time:00:01.38 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0046.png'
+Time: 00:01.78 (Saving: 00:00.18)
+
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Semantic
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.12 | Rendering 1 / 64 samples
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.59 | Rendering 26 / 64 samples
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:00.98 | Rendering 51 / 64 samples
+Fra:47 Mem:44.03M (Peak 112.56M) | Time:00:01.19 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0047.png'
+Time: 00:01.59 (Saving: 00:00.18)
+
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:00.96 | Rendering 51 / 64 samples
+Fra:48 Mem:44.03M (Peak 112.56M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0048.png'
+Time: 00:01.55 (Saving: 00:00.17)
+
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:49 Mem:44.03M (Peak 112.56M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0049.png'
+Time: 00:01.49 (Saving: 00:00.18)
+
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:50 Mem:44.03M (Peak 112.56M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0050.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:51 Mem:44.03M (Peak 112.56M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0051.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:52 Mem:44.03M (Peak 112.56M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0052.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:53 Mem:44.03M (Peak 112.56M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0053.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Semantic
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:54 Mem:44.03M (Peak 112.56M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0054.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:55 Mem:44.03M (Peak 112.56M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0055.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:56 Mem:44.03M (Peak 112.56M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0056.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.55 | Rendering 26 / 64 samples
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:00.97 | Rendering 51 / 64 samples
+Fra:57 Mem:44.03M (Peak 112.56M) | Time:00:01.18 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0057.png'
+Time: 00:01.56 (Saving: 00:00.18)
+
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:58 Mem:44.03M (Peak 112.56M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0058.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:59 Mem:44.03M (Peak 112.56M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0059.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:60 Mem:44.03M (Peak 112.56M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0060.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:61 Mem:44.03M (Peak 112.56M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0061.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:62 Mem:44.03M (Peak 112.56M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0062.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:63 Mem:44.03M (Peak 112.56M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0063.png'
+Time: 00:01.55 (Saving: 00:00.18)
+
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Foragecast
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:00.63 | Rendering 26 / 64 samples
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:01.13 | Rendering 51 / 64 samples
+Fra:64 Mem:44.03M (Peak 112.56M) | Time:00:01.37 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0064.png'
+Time: 00:01.76 (Saving: 00:00.17)
+
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Foragecast
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:00.63 | Rendering 26 / 64 samples
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:01.14 | Rendering 51 / 64 samples
+Fra:65 Mem:44.03M (Peak 112.56M) | Time:00:01.40 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0065.png'
+Time: 00:01.81 (Saving: 00:00.18)
+
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Camera
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing GP_Light
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.07 | Syncing Lyric_Foragecast
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.12 | Rendering 1 / 64 samples
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.57 | Rendering 26 / 64 samples
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:00.96 | Rendering 51 / 64 samples
+Fra:66 Mem:44.03M (Peak 112.56M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0066.png'
+Time: 00:01.54 (Saving: 00:00.17)
+
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:67 Mem:44.03M (Peak 112.56M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0067.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:68 Mem:44.03M (Peak 112.56M) | Time:00:01.05 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0068.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:69 Mem:44.03M (Peak 112.56M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0069.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:70 Mem:44.03M (Peak 112.56M) | Time:00:01.03 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0070.png'
+Time: 00:01.39 (Saving: 00:00.17)
+
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_Foragecast
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:71 Mem:44.03M (Peak 112.56M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0071.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.08 | Syncing GP_Camera
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.09 | Syncing GP_Light
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.09 | Syncing Mascot_GP
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.09 | Syncing Lyric_Foragecast
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.13 | Rendering 1 / 64 samples
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:72 Mem:44.03M (Peak 112.56M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0072.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Camera
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing GP_Light
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:73 Mem:44.03M (Peak 112.56M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0073.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:74 Mem:44.03M (Peak 112.57M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0074.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:75 Mem:44.03M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0075.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:76 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0076.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:77 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0077.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:78 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0078.png'
+Time: 00:01.50 (Saving: 00:00.18)
+
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:79 Mem:44.03M (Peak 112.57M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0079.png'
+Time: 00:01.57 (Saving: 00:00.18)
+
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.55 | Rendering 26 / 64 samples
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:00.96 | Rendering 51 / 64 samples
+Fra:80 Mem:44.03M (Peak 112.57M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0080.png'
+Time: 00:01.55 (Saving: 00:00.17)
+
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:81 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0081.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:82 Mem:44.03M (Peak 112.57M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0082.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:83 Mem:44.03M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0083.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Camera
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Light
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Lyric_AI-powered
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:84 Mem:44.03M (Peak 112.57M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0084.png'
+Time: 00:01.54 (Saving: 00:00.18)
+
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:85 Mem:44.03M (Peak 112.57M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0085.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:86 Mem:44.03M (Peak 112.57M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0086.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:87 Mem:44.03M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0087.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:88 Mem:44.03M (Peak 112.57M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0088.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:89 Mem:44.03M (Peak 112.57M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0089.png'
+Time: 00:01.55 (Saving: 00:00.18)
+
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:90 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0090.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:91 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0091.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:92 Mem:44.03M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0092.png'
+Time: 00:01.50 (Saving: 00:00.18)
+
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:93 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0093.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:94 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0094.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:95 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0095.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_AI-powered
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:96 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0096.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:97 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0097.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:98 Mem:44.03M (Peak 112.57M) | Time:00:01.05 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0098.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:99 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0099.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Lyric_video
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:100 Mem:44.03M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0100.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:101 Mem:44.03M (Peak 112.57M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0101.png'
+Time: 00:01.55 (Saving: 00:00.18)
+
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:102 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0102.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:103 Mem:44.03M (Peak 112.57M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0103.png'
+Time: 00:01.48 (Saving: 00:00.18)
+
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:104 Mem:44.03M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0104.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:105 Mem:44.03M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0105.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:106 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0106.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:107 Mem:44.03M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0107.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:108 Mem:44.03M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0108.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:109 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0109.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:110 Mem:44.03M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0110.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.55 | Rendering 26 / 64 samples
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:00.96 | Rendering 51 / 64 samples
+Fra:111 Mem:44.03M (Peak 112.57M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0111.png'
+Time: 00:01.55 (Saving: 00:00.17)
+
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:112 Mem:44.03M (Peak 112.57M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0112.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:113 Mem:44.03M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0113.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:114 Mem:44.03M (Peak 112.57M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0114.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:115 Mem:44.03M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0115.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:116 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0116.png'
+Time: 00:01.51 (Saving: 00:00.18)
+
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:117 Mem:44.03M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0117.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:118 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0118.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_video
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:119 Mem:44.03M (Peak 112.57M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0119.png'
+Time: 00:01.55 (Saving: 00:00.18)
+
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Camera
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Light
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Lyric_video
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:00.12 | Rendering 1 / 64 samples
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:00.61 | Rendering 26 / 64 samples
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:01.12 | Rendering 51 / 64 samples
+Fra:120 Mem:44.03M (Peak 112.57M) | Time:00:01.37 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0120.png'
+Time: 00:01.78 (Saving: 00:00.18)
+
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Camera
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Light
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:00.07 | Syncing Lyric_generation
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:00.61 | Rendering 26 / 64 samples
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:01.11 | Rendering 51 / 64 samples
+Fra:121 Mem:44.03M (Peak 112.57M) | Time:00:01.38 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0121.png'
+Time: 00:01.79 (Saving: 00:00.18)
+
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Camera
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Light
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing Lyric_generation
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:00.60 | Rendering 26 / 64 samples
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:01.07 | Rendering 51 / 64 samples
+Fra:122 Mem:44.04M (Peak 112.57M) | Time:00:01.27 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0122.png'
+Time: 00:01.66 (Saving: 00:00.17)
+
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:00.85 | Rendering 51 / 64 samples
+Fra:123 Mem:44.04M (Peak 112.57M) | Time:00:01.04 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0123.png'
+Time: 00:01.40 (Saving: 00:00.17)
+
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:124 Mem:44.04M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0124.png'
+Time: 00:01.47 (Saving: 00:00.18)
+
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:00.85 | Rendering 51 / 64 samples
+Fra:125 Mem:44.04M (Peak 112.57M) | Time:00:01.03 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0125.png'
+Time: 00:01.40 (Saving: 00:00.17)
+
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:126 Mem:44.04M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0126.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:127 Mem:44.04M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0127.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:128 Mem:44.04M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0128.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:129 Mem:44.04M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0129.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:130 Mem:44.04M (Peak 112.57M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0130.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:131 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0131.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:132 Mem:44.04M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0132.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:133 Mem:44.04M (Peak 112.57M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0133.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:00.83 | Rendering 51 / 64 samples
+Fra:134 Mem:44.04M (Peak 112.57M) | Time:00:01.02 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0134.png'
+Time: 00:01.38 (Saving: 00:00.17)
+
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:135 Mem:44.04M (Peak 112.57M) | Time:00:01.05 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0135.png'
+Time: 00:01.41 (Saving: 00:00.17)
+
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:136 Mem:44.04M (Peak 112.57M) | Time:00:01.01 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0136.png'
+Time: 00:01.37 (Saving: 00:00.17)
+
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:137 Mem:44.04M (Peak 112.57M) | Time:00:01.05 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0137.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:138 Mem:44.04M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0138.png'
+Time: 00:01.50 (Saving: 00:00.18)
+
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Camera
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing GP_Light
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.07 | Syncing Lyric_generation
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:139 Mem:44.04M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0139.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:140 Mem:44.04M (Peak 112.57M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0140.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:141 Mem:44.04M (Peak 112.57M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0141.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:142 Mem:44.04M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0142.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:143 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0143.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_generation
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:144 Mem:44.04M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0144.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:145 Mem:44.04M (Peak 112.57M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0145.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:146 Mem:44.04M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0146.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:147 Mem:44.04M (Peak 112.57M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0147.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:00.86 | Rendering 51 / 64 samples
+Fra:148 Mem:44.04M (Peak 112.57M) | Time:00:01.05 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0148.png'
+Time: 00:01.42 (Saving: 00:00.16)
+
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:149 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0149.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:150 Mem:44.04M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0150.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:151 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0151.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:152 Mem:44.04M (Peak 112.57M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0152.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:153 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0153.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:154 Mem:44.04M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0154.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:155 Mem:44.04M (Peak 112.57M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0155.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:156 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0156.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:157 Mem:44.04M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0157.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:158 Mem:44.04M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0158.png'
+Time: 00:01.51 (Saving: 00:00.18)
+
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:159 Mem:44.04M (Peak 112.57M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0159.png'
+Time: 00:01.42 (Saving: 00:00.17)
+
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.43 | Rendering 26 / 64 samples
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.74 | Rendering 51 / 64 samples
+Fra:160 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0160.png'
+Time: 00:01.26 (Saving: 00:00.16)
+
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.45 | Rendering 26 / 64 samples
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.79 | Rendering 51 / 64 samples
+Fra:161 Mem:44.04M (Peak 112.57M) | Time:00:00.96 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0161.png'
+Time: 00:01.33 (Saving: 00:00.17)
+
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:162 Mem:44.04M (Peak 112.57M) | Time:00:01.04 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0162.png'
+Time: 00:01.41 (Saving: 00:00.17)
+
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:163 Mem:44.04M (Peak 112.57M) | Time:00:01.07 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0163.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:164 Mem:44.04M (Peak 112.57M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0164.png'
+Time: 00:01.50 (Saving: 00:00.18)
+
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:165 Mem:44.04M (Peak 112.57M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0165.png'
+Time: 00:01.43 (Saving: 00:00.17)
+
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:00.85 | Rendering 51 / 64 samples
+Fra:166 Mem:44.04M (Peak 112.57M) | Time:00:01.04 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0166.png'
+Time: 00:01.40 (Saving: 00:00.17)
+
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:167 Mem:44.04M (Peak 112.57M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0167.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_Watch
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:168 Mem:44.04M (Peak 112.57M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0168.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Camera
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing GP_Light
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.06 | Syncing Lyric_the
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:169 Mem:44.04M (Peak 112.57M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0169.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:170 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0170.png'
+Time: 00:01.49 (Saving: 00:00.16)
+
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:171 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0171.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:172 Mem:44.04M (Peak 112.58M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0172.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:173 Mem:44.04M (Peak 112.58M) | Time:00:01.07 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0173.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:174 Mem:44.04M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0174.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:175 Mem:44.04M (Peak 112.58M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0175.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:176 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0176.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:177 Mem:44.04M (Peak 112.58M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0177.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:178 Mem:44.04M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0178.png'
+Time: 00:01.53 (Saving: 00:00.18)
+
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:00.96 | Rendering 51 / 64 samples
+Fra:179 Mem:44.04M (Peak 112.58M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0179.png'
+Time: 00:01.57 (Saving: 00:00.18)
+
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:00.96 | Rendering 51 / 64 samples
+Fra:180 Mem:44.04M (Peak 112.58M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0180.png'
+Time: 00:01.55 (Saving: 00:00.18)
+
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:00.98 | Rendering 51 / 64 samples
+Fra:181 Mem:44.04M (Peak 112.58M) | Time:00:01.18 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0181.png'
+Time: 00:01.56 (Saving: 00:00.17)
+
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:182 Mem:44.04M (Peak 112.58M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0182.png'
+Time: 00:01.46 (Saving: 00:00.17)
+
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:183 Mem:44.04M (Peak 112.58M) | Time:00:01.07 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0183.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:184 Mem:44.04M (Peak 112.58M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0184.png'
+Time: 00:01.50 (Saving: 00:00.18)
+
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:185 Mem:44.04M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0185.png'
+Time: 00:01.53 (Saving: 00:00.18)
+
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:186 Mem:44.04M (Peak 112.58M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0186.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:187 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0187.png'
+Time: 00:01.50 (Saving: 00:00.18)
+
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:188 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0188.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:189 Mem:44.04M (Peak 112.58M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0189.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:190 Mem:44.04M (Peak 112.58M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0190.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:191 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0191.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_the
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.46 | Rendering 26 / 64 samples
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:192 Mem:44.04M (Peak 112.58M) | Time:00:01.04 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0192.png'
+Time: 00:01.40 (Saving: 00:00.17)
+
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:193 Mem:44.04M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0193.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:194 Mem:44.04M (Peak 112.58M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0194.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:195 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0195.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Camera
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Light
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Lyric_magic
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:196 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0196.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:197 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0197.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:00.84 | Rendering 51 / 64 samples
+Fra:198 Mem:44.04M (Peak 112.58M) | Time:00:01.04 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0198.png'
+Time: 00:01.42 (Saving: 00:00.17)
+
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:199 Mem:44.04M (Peak 112.58M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0199.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:200 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0200.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:201 Mem:44.04M (Peak 112.58M) | Time:00:01.07 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0201.png'
+Time: 00:01.45 (Saving: 00:00.17)
+
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:202 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0202.png'
+Time: 00:01.51 (Saving: 00:00.18)
+
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:203 Mem:44.04M (Peak 112.58M) | Time:00:01.17 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0203.png'
+Time: 00:01.55 (Saving: 00:00.17)
+
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:204 Mem:44.04M (Peak 112.58M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0204.png'
+Time: 00:01.48 (Saving: 00:00.17)
+
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:205 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0205.png'
+Time: 00:01.51 (Saving: 00:00.19)
+
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:206 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0206.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:00.95 | Rendering 51 / 64 samples
+Fra:207 Mem:44.04M (Peak 112.58M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0207.png'
+Time: 00:01.55 (Saving: 00:00.18)
+
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Light
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Lyric_magic
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:00.97 | Rendering 51 / 64 samples
+Fra:208 Mem:44.04M (Peak 112.58M) | Time:00:01.19 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0208.png'
+Time: 00:01.59 (Saving: 00:00.18)
+
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:01.01 | Rendering 51 / 64 samples
+Fra:209 Mem:44.04M (Peak 112.58M) | Time:00:01.28 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0209.png'
+Time: 00:01.69 (Saving: 00:00.18)
+
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Camera
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Light
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Lyric_magic
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:00.12 | Rendering 1 / 64 samples
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:00.63 | Rendering 26 / 64 samples
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 51 / 64 samples
+Fra:210 Mem:44.04M (Peak 112.58M) | Time:00:01.35 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0210.png'
+Time: 00:01.75 (Saving: 00:00.18)
+
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Camera
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing GP_Light
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Mascot_GP
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Lyric_magic
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:00.58 | Rendering 26 / 64 samples
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:01.06 | Rendering 51 / 64 samples
+Fra:211 Mem:44.04M (Peak 112.58M) | Time:00:01.32 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0211.png'
+Time: 00:01.74 (Saving: 00:00.19)
+
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:212 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0212.png'
+Time: 00:01.65 (Saving: 00:00.21)
+
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.07 | Syncing Lyric_magic
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:213 Mem:44.04M (Peak 112.58M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0213.png'
+Time: 00:01.57 (Saving: 00:00.18)
+
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:214 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0214.png'
+Time: 00:01.61 (Saving: 00:00.19)
+
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:215 Mem:44.04M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0215.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_magic
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:216 Mem:44.04M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0216.png'
+Time: 00:01.52 (Saving: 00:00.20)
+
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:217 Mem:44.04M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0217.png'
+Time: 00:01.49 (Saving: 00:00.18)
+
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.11 | Rendering 1 / 64 samples
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:218 Mem:44.05M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0218.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:219 Mem:44.05M (Peak 112.58M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0219.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.49 | Rendering 26 / 64 samples
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:220 Mem:44.05M (Peak 112.58M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0220.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:221 Mem:44.05M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0221.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:00.88 | Rendering 51 / 64 samples
+Fra:222 Mem:44.05M (Peak 112.58M) | Time:00:01.09 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0222.png'
+Time: 00:01.47 (Saving: 00:00.17)
+
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:223 Mem:44.05M (Peak 112.58M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0223.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:224 Mem:44.05M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0224.png'
+Time: 00:01.53 (Saving: 00:00.18)
+
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:225 Mem:44.05M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0225.png'
+Time: 00:01.49 (Saving: 00:00.18)
+
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.50 | Rendering 26 / 64 samples
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:00.89 | Rendering 51 / 64 samples
+Fra:226 Mem:44.05M (Peak 112.58M) | Time:00:01.10 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0226.png'
+Time: 00:01.49 (Saving: 00:00.18)
+
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:227 Mem:44.05M (Peak 112.58M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0227.png'
+Time: 00:01.54 (Saving: 00:00.17)
+
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.48 | Rendering 26 / 64 samples
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:228 Mem:44.05M (Peak 112.58M) | Time:00:01.06 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0228.png'
+Time: 00:01.44 (Saving: 00:00.17)
+
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.47 | Rendering 26 / 64 samples
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:00.87 | Rendering 51 / 64 samples
+Fra:229 Mem:44.05M (Peak 112.58M) | Time:00:01.08 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0229.png'
+Time: 00:01.47 (Saving: 00:00.18)
+
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:230 Mem:44.05M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0230.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:231 Mem:44.05M (Peak 112.58M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0231.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:00.92 | Rendering 51 / 64 samples
+Fra:232 Mem:44.05M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0232.png'
+Time: 00:01.50 (Saving: 00:00.17)
+
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:00.91 | Rendering 51 / 64 samples
+Fra:233 Mem:44.05M (Peak 112.58M) | Time:00:01.11 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0233.png'
+Time: 00:01.49 (Saving: 00:00.17)
+
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:234 Mem:44.05M (Peak 112.58M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0234.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:235 Mem:44.05M (Peak 112.58M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0235.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.51 | Rendering 26 / 64 samples
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:00.90 | Rendering 51 / 64 samples
+Fra:236 Mem:44.05M (Peak 112.58M) | Time:00:01.12 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0236.png'
+Time: 00:01.51 (Saving: 00:00.17)
+
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:237 Mem:44.05M (Peak 112.58M) | Time:00:01.16 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0237.png'
+Time: 00:01.54 (Saving: 00:00.18)
+
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.54 | Rendering 26 / 64 samples
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:238 Mem:44.05M (Peak 112.58M) | Time:00:01.13 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0238.png'
+Time: 00:01.52 (Saving: 00:00.17)
+
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.52 | Rendering 26 / 64 samples
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:00.93 | Rendering 51 / 64 samples
+Fra:239 Mem:44.05M (Peak 112.58M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0239.png'
+Time: 00:01.53 (Saving: 00:00.17)
+
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Camera
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing GP_Light
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Mascot_GP
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.06 | Syncing Lyric_happen
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.53 | Rendering 26 / 64 samples
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:00.94 | Rendering 51 / 64 samples
+Fra:240 Mem:44.05M (Peak 112.58M) | Time:00:01.15 | Rendering 64 / 64 samples
+Saved: 'demo_reel/2d_grease/frames/frame_0240.png'
+Time: 00:01.53 (Saving: 00:00.18)
+
+
+✓ Rendering complete!
+
+ℹ ✓ Phase 2 complete
+ℹ 
+ℹ ======================================================================
+ℹ PHASE 3: VIDEO EXPORT
+ℹ ======================================================================
+ℹ Found 480 frames in demo_reel/2d_grease/frames
+======================================================================
+ENCODING FINAL VIDEO
+======================================================================
+Encoding video from 480 frames...
+  Codec: libx264
+  Quality: high
+  FPS: 24
+Running FFmpeg: /usr/bin/ffmpeg -framerate 24 -i demo_reel/2d_grease/frames/frame_%04d.png -i demo_reel/assets/demo_song.wav -c:v libx264 -crf 18 -preset slow -c:a aac -b:a 192k -pix_fmt yuv420p -shortest -y demo_reel/2d_grease/2d_grease_demo.mp4
+✓ Video encoded successfully
+  Output: demo_reel/2d_grease/2d_grease_demo.mp4
+  Size: 1,090,106 bytes (1.04 MB)
+ℹ ✓ Phase 3 complete
+ℹ   Video: demo_reel/2d_grease/2d_grease_demo.mp4
+ℹ 
+ℹ ======================================================================
+ℹ ✓ PIPELINE COMPLETE
+ℹ ======================================================================
+ℹ Check output directory: demo_reel/2d_grease
