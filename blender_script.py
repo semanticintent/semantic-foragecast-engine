@@ -478,37 +478,93 @@ def main():
 
     print()
 
-    # Build scene
-    builder = BlenderSceneBuilder(config, prep_data)
+    # Detect animation mode
+    animation_mode = config.get('animation', {}).get('mode', '3d')
+    print(f"Animation Mode: {animation_mode}")
+    print()
 
-    # Execute pipeline
-    builder.clear_scene()
-    camera = builder.setup_camera()
-    lights = builder.setup_lighting()
-    mascot = builder.create_mascot_placeholder()
+    # Route to appropriate builder based on mode
+    if animation_mode == '2d_grease':
+        # Build 2D Grease Pencil scene
+        from grease_pencil import build_2d_scene
+        builder = build_2d_scene(config, prep_data)
+        print("✓ 2D Grease Pencil scene built successfully")
 
-    # Animation (stub implementations)
-    builder.create_phoneme_shape_keys(mascot)
-    builder.animate_lip_sync(mascot)
-    builder.animate_gestures(mascot)
-    lyrics = builder.create_lyrics_text()
-    builder.animate_lights_to_beats(lights)
+    elif animation_mode == 'hybrid':
+        # Build hybrid scene (2D mascot on 3D stage)
+        print("Building hybrid scene (2D on 3D stage)...")
 
-    # Render setup
-    builder.setup_render_settings()
+        # First build 3D stage
+        builder_3d = BlenderSceneBuilder(config, prep_data)
+        builder_3d.clear_scene()
+        camera = builder_3d.setup_camera()
+        lights = builder_3d.setup_lighting()
+
+        # Then add 2D GP mascot
+        from grease_pencil import GreasePencilBuilder
+        builder_2d = GreasePencilBuilder(config, prep_data)
+
+        mascot_image = config.get('inputs', {}).get('mascot_image', '')
+        gp_mascot = builder_2d.create_gp_object("Mascot_GP_Hybrid")
+        mascot_layer = builder_2d.image_to_strokes(mascot_image, gp_mascot, "Mascot")
+
+        # Animate 2D mascot
+        builder_2d.create_mouth_shape_variations(gp_mascot, mascot_layer)
+        builder_2d.animate_lip_sync(gp_mascot)
+
+        intensity = config.get('animation', {}).get('gesture_intensity', 0.7)
+        builder_2d.add_beat_gestures(gp_mascot, intensity)
+
+        # Add lyrics (can be 3D or 2D)
+        if config.get('animation', {}).get('enable_lyrics', True):
+            lyrics = builder_2d.create_lyric_strokes()
+
+        # Use 3D lighting with 2D mascot
+        builder_3d.animate_lights_to_beats(lights)
+        builder_3d.setup_render_settings()
+
+        print("✓ Hybrid scene built successfully")
+
+    else:
+        # Default: Build 3D mesh scene
+        print("Building 3D mesh scene...")
+        builder = BlenderSceneBuilder(config, prep_data)
+
+        # Execute pipeline
+        builder.clear_scene()
+        camera = builder.setup_camera()
+        lights = builder.setup_lighting()
+        mascot = builder.create_mascot_placeholder()
+
+        # Animation (stub implementations)
+        builder.create_phoneme_shape_keys(mascot)
+        builder.animate_lip_sync(mascot)
+        builder.animate_gestures(mascot)
+        lyrics = builder.create_lyrics_text()
+        builder.animate_lights_to_beats(lights)
+
+        # Render setup
+        builder.setup_render_settings()
+
+        print("✓ 3D mesh scene built successfully")
 
     print()
     print("=" * 70)
     print("SCENE SETUP COMPLETE")
     print("=" * 70)
     print()
-    print("Phase 2 (Blender stub) complete!")
+    print(f"Mode: {animation_mode}")
+    print("Phase 2 (Blender) complete!")
     print("Full rendering disabled in stub mode.")
-    print("To enable rendering, uncomment builder.render_animation() in blender_script.py")
+    print("To enable rendering, uncomment render code in blender_script.py")
     print()
 
     # Uncomment to actually render:
-    # builder.render_animation()
+    # if animation_mode in ['2d_grease', 'hybrid']:
+    #     # Render with EEVEE for speed
+    #     bpy.ops.render.render(animation=True)
+    # else:
+    #     # builder.render_animation()
 
     return 0
 

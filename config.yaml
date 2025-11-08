@@ -1,5 +1,19 @@
 # Semantic Foragecast Engine - Configuration
-# Version: 1.0
+# Version: 4.0 (Phase 4: 2D Grease Pencil Extension)
+
+# Grease Pencil style settings (for 2d_grease and hybrid modes)
+gp_style:
+  # Stroke thickness in pixels
+  stroke_thickness: 3
+
+  # Ink style: "clean" (smooth), "sketchy" (varied), "wobbly" (rough)
+  ink_type: "sketchy"
+
+  # Enable procedural wobble effects
+  enable_wobble: true
+
+  # Wobble intensity (0.0 - 1.0)
+  wobble_intensity: 0.5
 
 # Input files
 inputs:
@@ -71,6 +85,9 @@ style:
 
 # Animation settings
 animation:
+  # Animation mode: "3d" (mesh-based), "2d_grease" (Grease Pencil), "hybrid" (2D on 3D stage)
+  mode: "2d_grease"
+
   # Enable lip-sync animation
   enable_lipsync: true
 
