@@ -319,18 +319,29 @@ class BlenderSceneBuilder:
 
         mascot_image = self.config.get('inputs', {}).get('mascot_image')
 
-        # For now, create a simple placeholder mesh
-        # TODO: Implement image-to-mesh conversion with rigging
-        bpy.ops.mesh.primitive_uv_sphere_add(radius=1, location=(0, 0, 1))
+        # Use billboard plane for flat image mascots (preserves 2D design)
+        # This works much better than wrapping around a sphere!
+        bpy.ops.mesh.primitive_plane_add(size=2, location=(0, 0, 1))
         mascot = bpy.context.object
         mascot.name = "Mascot"
 
-        # Increase mesh resolution for better material detail
+        # Rotate plane to face camera (90 degrees around X axis)
+        mascot.rotation_euler[0] = 1.5708  # 90 degrees in radians
+
+        # Scale slightly to match expected size
+        mascot.scale = (1.2, 1.2, 1.2)
+
+        # Smooth shading for better appearance
         bpy.ops.object.shade_smooth()
+
+        print("  Using billboard plane (preserves flat design)")
 
         # Create production-quality PBR material
         mat = bpy.data.materials.new(name="MascotMaterial_PBR")
         mat.use_nodes = True
+        mat.blend_method = 'BLEND'  # Enable alpha transparency
+        mat.shadow_method = 'CLIP'  # Proper shadows with transparency
+        mat.use_backface_culling = False  # Render both sides
         nodes = mat.node_tree.nodes
         links = mat.node_tree.links
         mascot.data.materials.append(mat)
@@ -729,14 +740,20 @@ class BlenderSceneBuilder:
 
         video_config = self.config.get('video', {})
 
-        # Render engine
-        engine = video_config.get('render_engine', 'EEVEE')
+        # Render engine - normalize config names to Blender names
+        engine_config = video_config.get('render_engine', 'EEVEE')
+        engine_map = {
+            'EEVEE': 'BLENDER_EEVEE',
+            'BLENDER_EEVEE': 'BLENDER_EEVEE',
+            'CYCLES': 'CYCLES'
+        }
+        engine = engine_map.get(engine_config, 'BLENDER_EEVEE')
         self.scene.render.engine = engine
         print(f"  Engine: {engine}")
 
         # Samples
         samples = video_config.get('samples', 128)
-        if engine == 'EEVEE':
+        if engine_config == 'EEVEE' or engine == 'BLENDER_EEVEE':
             self.scene.eevee.taa_render_samples = samples
             # EEVEE quality settings
             self.scene.eevee.use_gtao = True  # Ambient occlusion
@@ -744,7 +761,7 @@ class BlenderSceneBuilder:
             self.scene.eevee.use_ssr = True  # Screen space reflections
             self.scene.eevee.use_ssr_refraction = True
             self.scene.eevee.use_volumetric_shadows = True
-        elif engine == 'CYCLES':
+        elif engine_config == 'CYCLES' or engine == 'CYCLES':
             self.scene.cycles.samples = samples
             # Cycles quality settings
             self.scene.cycles.use_adaptive_sampling = True
