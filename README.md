@@ -535,9 +535,39 @@ python main.py --validate
 
 ## Platform Support
 
-- **Primary**: Windows 11
-- **Secondary**: Linux, macOS (cross-platform design)
+- **Primary**: Windows 11 (recommended for development)
+- **Secondary**: Linux (Ubuntu 22.04/24.04) for cloud deployments
 - **Offline**: No cloud dependencies
+
+**Cross-Platform Development:** See [CROSS_PLATFORM_DEV_GUIDE.md](CROSS_PLATFORM_DEV_GUIDE.md) for detailed setup instructions on both Windows and Linux, including how to switch between environments seamlessly
+## Platform Support
+
+- **Primary**: Windows 11 (recommended for development)
+- **Secondary**: Linux (Ubuntu 22.04/24.04) for cloud deployments
+- **Offline**: No cloud dependencies
+
+**Cross-Platform Development:** See [CROSS_PLATFORM_DEV_GUIDE.md](CROSS_PLATFORM_DEV_GUIDE.md) for detailed setup instructions on both Windows and Linux, including how to switch between environments seamlessly
+## Platform Support
+
+- **Primary**: Windows 11 (recommended for development)
+- **Secondary**: Linux (Ubuntu 22.04/24.04) for cloud deployments
+- **Offline**: No cloud dependencies
+
+**Cross-Platform Development:** See [CROSS_PLATFORM_DEV_GUIDE.md](CROSS_PLATFORM_DEV_GUIDE.md) for detailed setup instructions on both Windows and Linux, including how to switch between environments seamlessly
+## Platform Support
+
+- **Primary**: Windows 11 (recommended for development)
+- **Secondary**: Linux (Ubuntu 22.04/24.04) for cloud deployments
+- **Offline**: No cloud dependencies
+
+**Cross-Platform Development:** See [CROSS_PLATFORM_DEV_GUIDE.md](CROSS_PLATFORM_DEV_GUIDE.md) for detailed setup instructions on both Windows and Linux, including how to switch between environments seamlessly
+## Platform Support
+
+- **Primary**: Windows 11 (recommended for development)
+- **Secondary**: Linux (Ubuntu 22.04/24.04) for cloud deployments
+- **Offline**: No cloud dependencies
+
+**Cross-Platform Development:** See [CROSS_PLATFORM_DEV_GUIDE.md](CROSS_PLATFORM_DEV_GUIDE.md) for detailed setup instructions on both Windows and Linux, including how to switch between environments seamlessly
 
 ## Project Structure
 
