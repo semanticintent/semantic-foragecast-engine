@@ -90,7 +90,7 @@ class GreasePencilBuilder:
         for gpd in bpy.data.grease_pencils:
             bpy.data.grease_pencils.remove(gpd)
 
-        print("✓ Scene cleared for GP")
+        print("[OK] Scene cleared for GP")
 
     def create_gp_object(self, name: str = "GPencil") -> bpy.types.Object:
         """
@@ -225,7 +225,7 @@ class GreasePencilBuilder:
                     stroke.points[j].co = (scene_x, scene_y, scene_z)
                     stroke.points[j].pressure = 1.0
 
-            print(f"✓ Created {len(frame.strokes)} strokes with colors")
+            print(f"[OK] Created {len(frame.strokes)} strokes with colors")
 
             return layer
 
@@ -473,7 +473,7 @@ class GreasePencilBuilder:
             mouth_stroke.points[i].co = (x, y, 0.0)
             mouth_stroke.points[i].pressure = 1.0
 
-        print("✓ Created fallback strokes")
+        print("[OK] Created fallback strokes")
 
         return layer
 
@@ -507,7 +507,7 @@ class GreasePencilBuilder:
         # Store as custom properties for animation
         gp_obj["phoneme_shapes"] = phoneme_shapes
 
-        print(f"✓ Configured {len(phoneme_shapes)} phoneme shapes")
+        print(f"[OK] Configured {len(phoneme_shapes)} phoneme shapes")
 
     def animate_lip_sync(
         self,
@@ -544,7 +544,7 @@ class GreasePencilBuilder:
             gp_obj["mouth_open"] = openness
             gp_obj.keyframe_insert(data_path='["mouth_open"]', frame=frame)
 
-        print(f"✓ Lip-sync animated with {len(phonemes)} phonemes")
+        print(f"[OK] Lip-sync animated with {len(phonemes)} phonemes")
 
     def add_beat_gestures(
         self,
@@ -585,7 +585,7 @@ class GreasePencilBuilder:
             modifier.factor = intensity * 0.05
             modifier.keyframe_insert(data_path='factor', frame=rest_frame)
 
-        print(f"✓ Added beat gestures for {len(beat_times)} beats")
+        print(f"[OK] Added beat gestures for {len(beat_times)} beats")
 
     def create_lyric_strokes(self):
         """
@@ -655,7 +655,7 @@ class GreasePencilBuilder:
 
             lyric_objects.append(gp_word)
 
-        print(f"✓ Created {len(lyric_objects)} lyric stroke objects")
+        print(f"[OK] Created {len(lyric_objects)} lyric stroke objects")
 
         return lyric_objects
 
@@ -683,7 +683,7 @@ class GreasePencilBuilder:
         self.scene.render.resolution_x = resolution[0]
         self.scene.render.resolution_y = resolution[1]
 
-        print(f"✓ 2D camera configured: {resolution[0]}x{resolution[1]}, orthographic")
+        print(f"[OK] 2D camera configured: {resolution[0]}x{resolution[1]}, orthographic")
 
         return camera
 
@@ -698,7 +698,7 @@ class GreasePencilBuilder:
         light.data.energy = 100
         light.data.size = 5.0
 
-        print("✓ 2D lighting configured")
+        print("[OK] 2D lighting configured")
 
         return light
 
@@ -719,7 +719,7 @@ class GreasePencilBuilder:
         # Transparent background for 2D
         self.scene.render.film_transparent = True
 
-        print(f"✓ GP render settings configured")
+        print(f"[OK] GP render settings configured")
         print(f"  Output: {self.scene.render.filepath}")
 
 

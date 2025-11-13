@@ -64,7 +64,7 @@ class PipelineOrchestrator:
                 config = yaml.safe_load(f)
 
             if self.verbose:
-                print(f"✓ Loaded configuration from: {self.config_path}")
+                print(f"[OK] Loaded configuration from: {self.config_path}")
 
             return config
 
@@ -81,9 +81,9 @@ class PipelineOrchestrator:
         """
         if self.verbose:
             prefix = {
-                "INFO": "ℹ",
-                "WARNING": "⚠",
-                "ERROR": "✗"
+                "INFO": "[INFO]",
+                "WARNING": "[WARN]",
+                "ERROR": "[FAIL]"
             }.get(level, "•")
             print(f"{prefix} {message}")
 
@@ -127,7 +127,7 @@ class PipelineOrchestrator:
                 "\n".join(f"  - {f}" for f in missing_files)
             )
 
-        self._log("✓ All input files validated")
+        self._log("[OK] All input files validated")
 
     def _find_blender(self) -> Optional[str]:
         """
@@ -190,7 +190,7 @@ class PipelineOrchestrator:
             output_json=prep_json
         )
 
-        self._log("✓ Phase 1 complete")
+        self._log("[OK] Phase 1 complete")
         self._log(f"  Audio: {result['audio']['duration']}s @ {result['audio']['tempo']:.1f} BPM")
         self._log(f"  Beats: {len(result['beats']['beat_times'])}")
         self._log(f"  Phonemes: {len(result['phonemes'])}")
@@ -261,7 +261,7 @@ class PipelineOrchestrator:
             if result.stdout and self.verbose:
                 print(result.stdout)
 
-            self._log("✓ Phase 2 complete")
+            self._log("[OK] Phase 2 complete")
             self._log("")
 
         except subprocess.TimeoutExpired:
@@ -297,7 +297,7 @@ class PipelineOrchestrator:
         success = export_video_from_config(self.config, prep_data)
 
         if success:
-            self._log("✓ Phase 3 complete")
+            self._log("[OK] Phase 3 complete")
             output_dir = self.config.get('output', {}).get('output_dir', 'outputs')
             video_name = self.config.get('output', {}).get('video_name', 'final_video.mp4')
             output_path = os.path.join(output_dir, video_name)
@@ -330,7 +330,7 @@ class PipelineOrchestrator:
             self.phase3_export_video(prep_data)
 
             self._log("=" * 70)
-            self._log("✓ PIPELINE COMPLETE")
+            self._log("[OK] PIPELINE COMPLETE")
             self._log("=" * 70)
 
             output_dir = self.config.get('output', {}).get('output_dir', 'outputs')
@@ -402,7 +402,7 @@ For more information, see README.md
         if args.validate:
             orchestrator._ensure_directories()
             orchestrator._validate_inputs()
-            print("✓ Configuration and inputs validated successfully")
+            print("[OK] Configuration and inputs validated successfully")
             return 0
 
         # Single phase mode

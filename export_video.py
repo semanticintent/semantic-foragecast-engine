@@ -198,7 +198,7 @@ class VideoExporter:
                 return False
 
             file_size = os.path.getsize(output_path)
-            print(f"✓ Video encoded successfully")
+            print(f"[OK] Video encoded successfully")
             print(f"  Output: {output_path}")
             print(f"  Size: {file_size:,} bytes ({file_size / 1024 / 1024:.2f} MB)")
 
@@ -334,7 +334,7 @@ class VideoExporter:
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
 
             if result.returncode == 0 and os.path.exists(output_path):
-                print(f"✓ Preview created: {output_path}")
+                print(f"[OK] Preview created: {output_path}")
                 return True
             else:
                 print("ERROR: Preview creation failed")

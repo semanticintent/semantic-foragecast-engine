@@ -86,7 +86,7 @@ class BlenderSceneBuilder:
         for texture in bpy.data.textures:
             bpy.data.textures.remove(texture)
 
-        print("✓ Scene cleared")
+        print("[OK] Scene cleared")
 
     def setup_camera(self):
         """Create and position camera."""
@@ -109,7 +109,7 @@ class BlenderSceneBuilder:
         self.scene.render.resolution_y = resolution[1]
         self.scene.render.resolution_percentage = 100
 
-        print(f"✓ Camera created: {resolution[0]}x{resolution[1]}")
+        print(f"[OK] Camera created: {resolution[0]}x{resolution[1]}")
 
         return camera
 
@@ -202,7 +202,7 @@ class BlenderSceneBuilder:
             # Connect to output
             links.new(background.outputs['Background'], output_node.inputs['Surface'])
 
-            print(f"    ✓ HDRI environment configured (strength: {hdri_config.get('strength', 1.5)})")
+            print(f"    [OK] HDRI environment configured (strength: {hdri_config.get('strength', 1.5)})")
 
         # Key light (main spotlight) - adjusted for HDRI workflow
         spotlight_config = lights_config.get('spotlight', {})
@@ -220,7 +220,7 @@ class BlenderSceneBuilder:
                 key_light.data.color = spot_color
 
             lights.append(key_light)
-            print(f"    ✓ Spotlight: {key_light.data.energy}W")
+            print(f"    [OK] Spotlight: {key_light.data.energy}W")
 
         # Fill light (softer area light)
         bpy.ops.object.light_add(type='AREA', location=(-2, -2, 3))
@@ -245,9 +245,9 @@ class BlenderSceneBuilder:
                 rim_light.data.color = rim_color
 
             lights.append(rim_light)
-            print(f"    ✓ Rim light: {rim_light.data.energy}W")
+            print(f"    [OK] Rim light: {rim_light.data.energy}W")
 
-        print(f"✓ Production lighting complete ({style} style, {len(lights)} lights)")
+        print(f"[OK] Production lighting complete ({style} style, {len(lights)} lights)")
 
         return lights
 
@@ -304,7 +304,7 @@ class BlenderSceneBuilder:
             # (Could be enhanced with actual texture maps)
             print(f"  Stage material: {stage_color}, roughness: {bsdf.inputs['Roughness'].default_value}")
 
-        print("✓ Stage environment created")
+        print("[OK] Stage environment created")
 
         return stage
 
@@ -412,7 +412,7 @@ class BlenderSceneBuilder:
             if tex_image.image.alpha_mode != 'NONE':
                 links.new(tex_image.outputs['Alpha'], bsdf.inputs['Alpha'])
 
-            print("  ✓ Texture loaded with UV mapping")
+            print("  [OK] Texture loaded with UV mapping")
 
         else:
             # Use primary color from config if no texture
@@ -421,7 +421,7 @@ class BlenderSceneBuilder:
                 bsdf.inputs['Base Color'].default_value = (*primary_color, 1.0)
             print("  Using solid color (no texture)")
 
-        print("✓ Mascot created with production PBR materials")
+        print("[OK] Mascot created with production PBR materials")
         print("  NOTE: Full image-to-mesh rigging not yet implemented")
 
         return mascot
@@ -448,7 +448,7 @@ class BlenderSceneBuilder:
             sk = mascot.shape_key_add(name=f'Phoneme_{phoneme}')
             # TODO: Actually deform mesh for each phoneme
 
-        print(f"✓ Created {len(phoneme_shapes)} phoneme shape keys (placeholders)")
+        print(f"[OK] Created {len(phoneme_shapes)} phoneme shape keys (placeholders)")
 
     def animate_lip_sync(self, mascot):
         """
@@ -491,7 +491,7 @@ class BlenderSceneBuilder:
                 sk.value = 0.0
                 sk.keyframe_insert(data_path='value', frame=next_frame)
 
-        print(f"✓ Lip-sync animation generated ({len(phonemes)} phoneme transitions)")
+        print(f"[OK] Lip-sync animation generated ({len(phonemes)} phoneme transitions)")
 
     def animate_gestures(self, mascot):
         """
@@ -526,7 +526,7 @@ class BlenderSceneBuilder:
             mascot.location.z = 1.0
             mascot.keyframe_insert(data_path='location', frame=rest_frame)
 
-        print(f"✓ Gesture animation generated ({len(beat_times)} beats)")
+        print(f"[OK] Gesture animation generated ({len(beat_times)} beats)")
 
     def create_lyrics_text(self):
         """
@@ -695,7 +695,7 @@ class BlenderSceneBuilder:
 
             text_objects.append(text_obj)
 
-        print(f"✓ Created {len(text_objects)} professional lyric text objects")
+        print(f"[OK] Created {len(text_objects)} professional lyric text objects")
         print(f"  Style: {lyrics_style}")
         print(f"  Material: emission + glossy with PBR properties")
 
@@ -732,7 +732,7 @@ class BlenderSceneBuilder:
                 light.data.energy = base_energy
                 light.data.keyframe_insert(data_path='energy', frame=frame + 3)
 
-        print(f"✓ Lights animated to {len(beat_times)} beats")
+        print(f"[OK] Lights animated to {len(beat_times)} beats")
 
     def setup_render_settings(self):
         """Configure production-quality render engine and output settings."""
@@ -820,7 +820,7 @@ class BlenderSceneBuilder:
         # Film settings (transparency, etc.)
         self.scene.render.film_transparent = False  # Opaque background for now
 
-        print(f"✓ Render settings configured")
+        print(f"[OK] Render settings configured")
         print(f"  Output: {self.scene.render.filepath}")
 
     def setup_compositor(self):
@@ -1037,7 +1037,7 @@ class BlenderSceneBuilder:
             grain_config.get('enabled', False)
         ])
 
-        print(f"✓ Compositor configured with {effects_count} effects")
+        print(f"[OK] Compositor configured with {effects_count} effects")
 
     def render_animation(self):
         """Render the animation."""
@@ -1050,7 +1050,7 @@ class BlenderSceneBuilder:
 
         bpy.ops.render.render(animation=True)
 
-        print("✓ Rendering complete")
+        print("[OK] Rendering complete")
 
 
 def load_config(config_path: str) -> Dict:
@@ -1110,7 +1110,7 @@ def main():
         # Build 2D Grease Pencil scene
         from grease_pencil import build_2d_scene
         builder = build_2d_scene(config, prep_data)
-        print("✓ 2D Grease Pencil scene built successfully")
+        print("[OK] 2D Grease Pencil scene built successfully")
 
     elif animation_mode == 'hybrid':
         # Build hybrid scene (2D mascot on 3D stage)
@@ -1146,7 +1146,7 @@ def main():
         builder_3d.setup_render_settings()
         builder_3d.setup_compositor()
 
-        print("✓ Hybrid scene built successfully")
+        print("[OK] Hybrid scene built successfully")
 
     else:
         # Default: Build 3D mesh scene
@@ -1171,7 +1171,7 @@ def main():
         builder.setup_render_settings()
         builder.setup_compositor()
 
-        print("✓ 3D mesh scene built successfully")
+        print("[OK] 3D mesh scene built successfully")
 
     print()
     print("=" * 70)
@@ -1198,7 +1198,7 @@ def main():
         print("Rendering 3D animation...")
         builder.render_animation()
 
-    print("\n✓ Rendering complete!")
+    print("\n[OK] Rendering complete!")
 
     return 0
 
