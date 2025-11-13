@@ -1,48 +1,47 @@
-# Quick preview config for testing production features
-# Lower resolution and samples for faster rendering
-
 inputs:
-  mascot_image: demo_reel/assets/demo_fox.png
-  song_file: demo_reel/assets/demo_song.wav
-  lyrics_file: demo_reel/assets/demo_lyrics.txt
-
+  mascot_image: C:/workspace/semantic-foragecast-engine/demo_reel/assets/demo_fox.png
+  song_file: C:/workspace/semantic-foragecast-engine/demo_reel/assets/demo_song.wav
+  lyrics_file: C:/workspace/semantic-foragecast-engine/demo_reel/assets/demo_lyrics.txt
 output:
   output_dir: demo_reel/3d_preview
   video_name: preview.mp4
   frames_dir: demo_reel/3d_preview/frames
   prep_json: demo_reel/3d_preview/prep_data.json
-
 video:
-  resolution: [1280, 720]  # 720p for preview
+  resolution:
+  - 1280
+  - 720
   fps: 24
   render_engine: CYCLES
-  samples: 32  # Lower samples for faster preview
+  samples: 32
   use_gpu: true
   persistent_data: true
-  # Motion blur
   motion_blur: true
   motion_blur_shutter: 0.5
-  # Video encoding
   codec: libx264
   quality: high
-  # Denoising
   use_denoising: false
-
 style:
   lighting: production
   mascot: fox
   stage: true
   colors:
-    primary: [0.95, 0.4, 0.2]    # Orange
-    secondary: [0.2, 0.6, 0.9]   # Blue
-    accent: [0.95, 0.85, 0.3]    # Yellow
-
+    primary:
+    - 0.95
+    - 0.4
+    - 0.2
+    secondary:
+    - 0.2
+    - 0.6
+    - 0.9
+    accent:
+    - 0.95
+    - 0.85
+    - 0.3
 animation:
-  mode: 3d  # Use 3D mesh
+  mode: 3d
   enable_lyrics: true
   lyrics_style: professional
-
-# Production-quality effects (enabled for preview)
 effects:
   lights:
     flashes:
@@ -52,19 +51,26 @@ effects:
       enabled: true
       strength: 1.5
       rotation: 45
-      fallback_color: [0.8, 0.9, 1.0]
+      fallback_color:
+      - 0.8
+      - 0.9
+      - 1.0
     spotlight:
       enabled: true
       intensity: 1000
       spot_size: 60
       spot_blend: 0.3
-      color: [1.0, 0.98, 0.95]
+      color:
+      - 1.0
+      - 0.98
+      - 0.95
     rim_light:
       enabled: true
       intensity: 500
-      color: [0.3, 0.5, 1.0]
-
-# PBR Materials
+      color:
+      - 0.3
+      - 0.5
+      - 1.0
 materials:
   mascot:
     type: pbr
@@ -80,11 +86,12 @@ materials:
     metallic: 0.3
   stage:
     type: pbr
-    color: [0.15, 0.15, 0.18]
+    color:
+    - 0.15
+    - 0.15
+    - 0.18
     roughness: 0.7
     metallic: 0.0
-
-# Compositor effects (same as production)
 compositor:
   enabled: true
   dof:
@@ -108,3 +115,12 @@ compositor:
   film_grain:
     enabled: true
     amount: 0.02
+ffmpeg:
+  executable_path: ffmpeg/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe
+blender:
+  executable_path: C:/Program Files/Blender Foundation/Blender 4.0/blender.exe
+  background: true
+  script_path: blender_script.py
+rhubarb:
+  executable_path: null
+  use_mock_fallback: true
