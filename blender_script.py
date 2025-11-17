@@ -92,13 +92,14 @@ class BlenderSceneBuilder:
         """Create and position camera."""
         print("Setting up camera...")
 
-        # Create camera
-        bpy.ops.object.camera_add(location=(0, -5, 2))
+        # Create camera - position to face mascot straight-on
+        # Mascot is at (0, 0, 1), so camera should be on negative Y axis
+        bpy.ops.object.camera_add(location=(0, -6, 1))
         camera = bpy.context.object
         camera.name = "MainCamera"
 
-        # Point camera at origin
-        camera.rotation_euler = (1.3, 0, 0)  # About 75 degrees
+        # Point camera straight at mascot (only slight upward tilt)
+        camera.rotation_euler = (1.5708, 0, 0)  # 90 degrees = face forward
 
         # Set as active camera
         self.scene.camera = camera
@@ -559,9 +560,10 @@ class BlenderSceneBuilder:
             start_time = word_data['start']
             end_time = word_data['end']
 
-            # Create text object - position above mascot for better visibility
-            y_position = 2.5  # Above mascot
-            z_position = 0.0  # At mascot height
+            # Create text object - position BELOW mascot so it's visible from front camera
+            # Mascot is at (0, 0, 1), text should be in front and below
+            y_position = 0.0  # Same depth as mascot
+            z_position = -0.5  # Below mascot (mascot is at z=1, this puts text at z=0.5 after mascot size)
 
             bpy.ops.object.text_add(location=(0, y_position, z_position))
             text_obj = bpy.context.object
