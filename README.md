@@ -74,6 +74,29 @@ Lyrics should use the pipe-delimited format:
 
 Format: `START_TIME-END_TIME word1|word2|word3`
 
+**💡 NEW: Automated Lyrics Timing Available!**
+
+Instead of manual timing, use one of three automated methods:
+
+1. **Whisper** (Recommended): Auto-transcribes audio with word-level timestamps
+   ```bash
+   pip install openai-whisper
+   python auto_lyrics_whisper.py assets/song.wav --output assets/lyrics.txt
+   ```
+
+2. **Gentle**: Aligns known lyrics to audio (most accurate)
+   ```bash
+   docker run -p 8765:8765 lowerquality/gentle
+   python auto_lyrics_gentle.py --audio song.wav --lyrics text.txt --output lyrics.txt
+   ```
+
+3. **Beat-Based**: Quick distribution across detected beats
+   ```bash
+   python auto_lyrics_beats.py --prep-data prep_data.json --lyrics-text "Your lyrics"
+   ```
+
+See **[AUTOMATED_LYRICS_GUIDE.md](AUTOMATED_LYRICS_GUIDE.md)** for detailed instructions.
+
 ### JSON Output Structure
 
 ```json

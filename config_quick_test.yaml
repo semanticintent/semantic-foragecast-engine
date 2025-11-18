@@ -1,0 +1,107 @@
+# Quick Test Configuration - Full Pipeline
+# Low resolution, fast rendering for testing complete automation
+# Runs full song length but renders quickly
+
+# Input files
+inputs:
+  mascot_image: "assets/fox.png"
+  song_file: "assets/song.wav"
+  lyrics_file: "assets/lyrics.txt"
+
+# Output settings
+output:
+  output_dir: "outputs/quick_test"
+  video_name: "quick_test.mp4"
+  frames_dir: "outputs/quick_test/frames"
+  prep_json: "outputs/quick_test/prep_data.json"
+
+# Video specifications - LOW RESOLUTION FOR SPEED
+video:
+  # Low resolution = fast rendering
+  resolution: [640, 360]  # 360p (1/9th the pixels of 1080p!)
+
+  fps: 24  # Keep normal FPS for smooth playback
+
+  # Use EEVEE (fast) instead of CYCLES
+  render_engine: "EEVEE"
+
+  # Low sample count for speed
+  samples: 32  # Reduced from 128
+
+  # Fast codec settings
+  codec: "libx264"
+  quality: "medium"  # Not ultra, just medium
+
+# Style configuration
+style:
+  lighting: "jazzy"
+  mascot: "fox"
+  colors:
+    primary: [0.8, 0.3, 0.9]
+    secondary: [0.3, 0.8, 0.9]
+    accent: [0.9, 0.8, 0.3]
+  background: "hdri"
+
+# Animation settings
+animation:
+  # Choose mode: "2d_grease" is FASTER than "3d"
+  mode: "2d_grease"  # 2D renders ~2x faster
+
+  enable_lipsync: true
+  enable_gestures: true
+  enable_lyrics: true
+  enable_effects: false  # Disable effects for speed
+
+  gesture_intensity: 0.7
+  lyrics_style: "bounce"  # Simple style, not "professional"
+
+# Grease Pencil style (for 2D mode)
+gp_style:
+  stroke_thickness: 3
+  ink_type: "clean"  # Clean is faster than sketchy
+  enable_wobble: false  # Disable wobble for speed
+  wobble_intensity: 0.0
+
+# Stage effects - MINIMAL FOR SPEED
+effects:
+  fog:
+    enabled: false  # Disable fog
+
+  particles:
+    enabled: false  # Disable particles
+
+  lights:
+    spotlight:
+      enabled: true
+      intensity: 500
+
+    flashes:
+      enabled: false  # Disable flashes for speed
+
+    hdri:
+      enabled: false  # Disable HDRI for speed
+      strength: 1.0
+
+# Rhubarb settings
+rhubarb:
+  executable_path: null
+  use_mock_fallback: true  # Use mock for speed
+
+# Advanced settings
+advanced:
+  # Enable preview mode for extra speed
+  preview_mode: true
+  preview_scale: 1.0  # Already low res, so keep at 1.0
+
+  keep_intermediate: true  # Keep files for debugging
+  verbose: true
+  threads: null  # Use all available CPU cores
+
+  # Debug mode - set to true to see positioning markers
+  debug_mode: false
+
+# Blender settings
+blender:
+  executable_path: null  # Auto-detect
+  background: true
+  script_path: "blender_script.py"

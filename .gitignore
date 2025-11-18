@@ -61,3 +61,8 @@ outputs/*/frames/
 demo_reel/*/prep_data.json
 demo_reel/*/*.mp4
 demo_reel/*/*.avi
+
+# Exclude test output directories
+outputs/*/prep_data.json
+outputs/*/*.mp4
+outputs/*/*.avi

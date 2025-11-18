@@ -1,0 +1,20 @@
+# Optional dependencies for automated lyrics timing
+# Install with: pip install -r requirements-lyrics-auto.txt
+
+# Method 1: Whisper (Automatic Speech Recognition)
+# For automatic transcription and word-level timestamps
+openai-whisper>=20231117
+
+# Method 2: Gentle Forced Aligner
+# Requires Gentle server (Docker recommended)
+# Only the Python client is needed here
+requests>=2.31.0
+
+# Optional: For better audio processing with Whisper
+# ffmpeg-python>=0.2.0
+
+# Note: Gentle server itself requires Docker:
+#   docker run -p 8765:8765 lowerquality/gentle
+#
+# Method 3 (Beat-Based) requires no additional dependencies
+# It uses the existing librosa installation from requirements.txt
