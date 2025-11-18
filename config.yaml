@@ -158,6 +158,10 @@ advanced:
   # Number of CPU threads for rendering (null = auto)
   threads: null
 
+  # Debug mode - adds visual markers showing camera, mascot, and text positions
+  # Useful for troubleshooting positioning issues
+  debug_mode: false
+
 # Blender settings
 blender:
   # Path to Blender executable (null = auto-detect from PATH)

@@ -560,10 +560,12 @@ class BlenderSceneBuilder:
             start_time = word_data['start']
             end_time = word_data['end']
 
-            # Create text object - position BELOW mascot so it's visible from front camera
-            # Mascot is at (0, 0, 1), text should be in front and below
-            y_position = 0.0  # Same depth as mascot
-            z_position = -0.5  # Below mascot (mascot is at z=1, this puts text at z=0.5 after mascot size)
+            # Create text object - position in front and below mascot for visibility
+            # Camera is at (0, -6, 1) looking at mascot at (0, 0, 1)
+            # Text should be closer to camera (more negative Y) and lower on screen (lower Z)
+            # This puts text in the lower third of the frame, standard for subtitles
+            y_position = -2.0  # Closer to camera than mascot for better visibility
+            z_position = 0.2   # Below mascot center (mascot at z=1, this is ~0.8 below)
 
             bpy.ops.object.text_add(location=(0, y_position, z_position))
             text_obj = bpy.context.object
@@ -1041,6 +1043,79 @@ class BlenderSceneBuilder:
 
         print(f"[OK] Compositor configured with {effects_count} effects")
 
+    def add_debug_visualizers(self):
+        """
+        Add visual markers to help debug scene positioning.
+        Creates small sphere markers at key positions with labels.
+        Enable by setting 'debug_mode: true' in config.yaml under 'advanced'.
+        """
+        if not self.config.get('advanced', {}).get('debug_mode', False):
+            return
+
+        print("Adding debug visualization markers...")
+
+        # Marker positions to visualize
+        markers = [
+            {"name": "Camera", "location": (0, -6, 1), "color": (1, 0, 0)},  # Red
+            {"name": "Mascot", "location": (0, 0, 1), "color": (0, 1, 0)},   # Green
+            {"name": "Text_Zone", "location": (0, -2, 0.2), "color": (0, 0, 1)},  # Blue
+            {"name": "Origin", "location": (0, 0, 0), "color": (1, 1, 0)},   # Yellow
+        ]
+
+        for marker in markers:
+            # Create small sphere
+            bpy.ops.mesh.primitive_uv_sphere_add(
+                radius=0.1,
+                location=marker["location"]
+            )
+            sphere = bpy.context.object
+            sphere.name = f"DEBUG_{marker['name']}"
+
+            # Create emission material so it's always visible
+            mat = bpy.data.materials.new(name=f"Debug_{marker['name']}")
+            mat.use_nodes = True
+            nodes = mat.node_tree.nodes
+            nodes.clear()
+
+            emission = nodes.new('ShaderNodeEmission')
+            emission.inputs['Color'].default_value = (*marker['color'], 1.0)
+            emission.inputs['Strength'].default_value = 5.0
+
+            output = nodes.new('ShaderNodeOutputMaterial')
+            mat.node_tree.links.new(emission.outputs[0], output.inputs[0])
+
+            sphere.data.materials.append(mat)
+
+            # Add text label
+            bpy.ops.object.text_add(location=(
+                marker["location"][0] + 0.2,
+                marker["location"][1],
+                marker["location"][2] + 0.2
+            ))
+            text = bpy.context.object
+            text.name = f"DEBUG_Label_{marker['name']}"
+            text.data.body = marker['name']
+            text.data.size = 0.15
+            text.data.align_x = 'LEFT'
+
+            # Small emission for text
+            text_mat = bpy.data.materials.new(name=f"Debug_Text_{marker['name']}")
+            text_mat.use_nodes = True
+            text_nodes = text_mat.node_tree.nodes
+            text_nodes.clear()
+
+            text_emission = text_nodes.new('ShaderNodeEmission')
+            text_emission.inputs['Color'].default_value = (1, 1, 1, 1)
+            text_emission.inputs['Strength'].default_value = 3.0
+
+            text_output = text_nodes.new('ShaderNodeOutputMaterial')
+            text_mat.node_tree.links.new(text_emission.outputs[0], text_output.inputs[0])
+
+            text.data.materials.append(text_mat)
+
+        print(f"[OK] Added {len(markers)} debug markers")
+        print("  Markers: Camera (red), Mascot (green), Text_Zone (blue), Origin (yellow)")
+
     def render_animation(self):
         """Render the animation."""
         print("=" * 70)
@@ -1168,6 +1243,9 @@ def main():
         builder.animate_gestures(mascot)
         lyrics = builder.create_lyrics_text()
         builder.animate_lights_to_beats(lights)
+
+        # Add debug visualizers if enabled
+        builder.add_debug_visualizers()
 
         # Render setup
         builder.setup_render_settings()
