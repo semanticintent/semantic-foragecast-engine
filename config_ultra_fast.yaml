@@ -1,0 +1,88 @@
+# Ultra-Fast Test Configuration
+# Absolute minimum quality for FASTEST possible testing
+# Use this to verify pipeline works, then use config_quick_test.yaml for better quality
+
+inputs:
+  mascot_image: "assets/fox.png"
+  song_file: "assets/song.wav"
+  lyrics_file: "assets/lyrics.txt"
+
+output:
+  output_dir: "outputs/ultra_fast"
+  video_name: "ultra_fast.mp4"
+  frames_dir: "outputs/ultra_fast/frames"
+  prep_json: "outputs/ultra_fast/prep_data.json"
+
+video:
+  # Tiny resolution for maximum speed
+  resolution: [320, 180]  # 180p - smallest usable size
+
+  fps: 12  # Half normal FPS for speed (still watchable)
+
+  render_engine: "EEVEE"  # Fast engine
+
+  samples: 16  # Minimum samples (will be grainy but fast)
+
+  codec: "libx264"
+  quality: "low"  # Fastest encoding
+
+style:
+  lighting: "jazzy"
+  mascot: "fox"
+  colors:
+    primary: [0.8, 0.3, 0.9]
+    secondary: [0.3, 0.8, 0.9]
+    accent: [0.9, 0.8, 0.3]
+  background: "solid"  # Solid color faster than HDRI
+
+animation:
+  mode: "2d_grease"  # 2D is faster than 3D
+
+  enable_lipsync: true
+  enable_gestures: true
+  enable_lyrics: true
+  enable_effects: false  # No effects
+
+  gesture_intensity: 0.5
+  lyrics_style: "bounce"
+
+gp_style:
+  stroke_thickness: 2  # Thinner = faster
+  ink_type: "clean"
+  enable_wobble: false
+  wobble_intensity: 0.0
+
+effects:
+  fog:
+    enabled: false
+
+  particles:
+    enabled: false
+
+  lights:
+    spotlight:
+      enabled: true
+      intensity: 300  # Lower intensity
+
+    flashes:
+      enabled: false
+
+    hdri:
+      enabled: false
+
+rhubarb:
+  executable_path: null
+  use_mock_fallback: true
+
+advanced:
+  preview_mode: true
+  preview_scale: 1.0
+  keep_intermediate: false  # Don't keep frames to save space
+  verbose: true
+  threads: null
+  debug_mode: false
+
+blender:
+  executable_path: null
+  background: true
+  script_path: "blender_script.py"
