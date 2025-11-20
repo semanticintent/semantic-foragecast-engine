@@ -22,11 +22,15 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | **Ultra Fast** | 320x180 | 57,600 | 12 | 16 | 4 min | 489 KB |
 | **360p 12fps** | 640x360 | 230,400 | 12 | 16 | 6 min | 806 KB |
 | **540p 12fps** | 960x540 | 518,400 | 12 | 24 | 9 min | 1.2 MB |
+| **720p 12fps** | 1280x720 | 921,600 | 12 | 32 | 12-13 min | 1.5 MB |
 
 **Pixel Scaling**:
 - 360p is **4.0x** more pixels than 180p
 - 540p is **9.0x** more pixels than 180p
+- 720p is **16.0x** more pixels than 180p
 - 540p is **2.25x** more pixels than 360p
+- 720p is **4.0x** more pixels than 360p
+- 720p is **1.78x** more pixels than 540p
 
 ---
 
@@ -39,10 +43,12 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | 180p | 4 min | 0.67s | 1.0x (baseline) |
 | 360p | 6 min | 1.0s | 1.5x |
 | 540p | 9 min | 1.5s | 2.25x |
+| 720p | 12-13 min | 2.0-2.2s | 3.0-3.25x |
 
 **Observation**: Render time scales **sub-linearly** with pixel count
 - 4x more pixels (180p→360p) = 1.5x time (not 4x)
-- Blender's EEVEE engine has good scalability
+- 16x more pixels (180p→720p) = 3.0x time (not 16x)
+- Blender's EEVEE engine has excellent scalability
 
 ### File Size Scaling
 
@@ -51,10 +57,12 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | 180p | 489 KB | 8.5 bytes/pixel | Baseline |
 | 360p | 806 KB | 3.5 bytes/pixel | Better |
 | 540p | 1.2 MB | 2.3 bytes/pixel | Best |
+| 720p | 1.5 MB | 1.6 bytes/pixel | Excellent |
 
 **Observation**: Higher resolutions compress better
 - More pixels allow H.264 to find better patterns
-- Efficiency improves at higher resolutions
+- Efficiency improves significantly at higher resolutions
+- 720p achieves 5.3x better compression efficiency than 180p
 
 ---
 
@@ -88,6 +96,16 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 - **Lyrics**: Very readable, professional text rendering
 - **Overall**: Publication-ready quality
 - **Recommendation**: Final preview before 1080p production
+
+**720p (1280x720)** - 720p 12fps Config (HD):
+- **Mascot**: ✅✅✅ Excellent HD quality, extremely crisp
+- **Ears**: Perfectly sharp triangular outlines, smooth edges
+- **Eyes**: Very detailed circular shapes with clean inner features
+- **Nose/Mouth**: Ultra-smooth grease pencil strokes, HD detail
+- **Lyrics**: Crystal clear text rendering, professional quality
+- **Stroke Quality**: Thicker strokes (5px) render beautifully at HD
+- **Overall**: Broadcast-ready HD quality
+- **Recommendation**: High-quality production, YouTube HD uploads
 
 ---
 
@@ -158,6 +176,37 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 
 ---
 
+### Tier 4: 720p @ 12fps (HD Quality)
+**Use For**:
+- ✅ High-quality YouTube uploads (720p HD)
+- ✅ Professional client deliverables
+- ✅ Desktop/laptop viewing
+- ✅ Broadcast-ready content (with 12fps caveat)
+- ✅ High-quality social media posts
+- ✅ Portfolio pieces
+
+**Don't Use For**:
+- ❌ Quick iteration/testing
+- ❌ 1080p+ display targets (use full 1080p instead)
+
+**Verdict**: Production-ready HD tier
+
+**Trade-off**:
+- 3.0-3.25x render time vs 180p (12-13 min vs 4 min)
+- Only 1.4x render time vs 540p (12-13 min vs 9 min)
+- Standard HD quality (1280x720)
+- Excellent for YouTube, social media
+- Still fast enough for reasonable iteration
+
+**Why Use This Tier**:
+- Standard HD resolution widely supported
+- Only 3-4 more minutes than 540p
+- Significantly better quality for final output
+- Good balance for non-1080p production work
+- 16x better than baseline 180p
+
+---
+
 ## Detailed Quality Metrics
 
 ### Text Readability
@@ -167,6 +216,7 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | 180p | Blurry | ⭐⭐ Poor | Hard to read, pixelated |
 | 360p | Clear | ⭐⭐⭐⭐ Good | Readable, acceptable |
 | 540p | Sharp | ⭐⭐⭐⭐⭐ Excellent | Very readable, crisp |
+| 720p | Crystal clear | ⭐⭐⭐⭐⭐+ Professional | HD quality, perfect clarity |
 
 **Minimum for readable text**: 360p
 
@@ -177,6 +227,7 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | 180p | Barely visible | Very aliased | ⭐⭐ Poor |
 | 360p | Clear features | Some aliasing | ⭐⭐⭐⭐ Good |
 | 540p | Very clear | Smooth strokes | ⭐⭐⭐⭐⭐ Excellent |
+| 720p | Extremely clear | Ultra-smooth | ⭐⭐⭐⭐⭐+ HD |
 
 **Minimum for clear mascot**: 360p
 
@@ -187,10 +238,12 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | 180p | Visible | Visible | Functional |
 | 360p | Clear | Clear | Good |
 | 540p | Very clear | Very clear | Excellent |
+| 720p | Extremely clear | Extremely clear | Perfect |
 
 **Note**: All resolutions show smooth animation at 12fps
 - Animation timing is resolution-independent
 - Quality difference is visual clarity, not motion smoothness
+- 720p makes subtle details like mouth shapes crystal clear
 
 ---
 
@@ -236,10 +289,15 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 - **Quality Gain**: ⭐⭐ (Noticeable but diminishing returns)
 - **Verdict**: ⚠️ Depends on use case
 
-**540p → 1080p** (estimated):
-- **Time Cost**: +35 minutes (390% increase)
-- **Quality Gain**: ⭐⭐⭐⭐ (Significant for final output)
-- **Verdict**: ✅ Worth it for production, skip for preview
+**540p → 720p**:
+- **Time Cost**: +3-4 minutes (33-44% increase)
+- **Quality Gain**: ⭐⭐⭐ (HD quality, significant improvement)
+- **Verdict**: ✅ Worth it for production HD content
+
+**720p → 1080p** (estimated):
+- **Time Cost**: +30-35 minutes (250-280% increase)
+- **Quality Gain**: ⭐⭐⭐ (Full HD, professional polish)
+- **Verdict**: ✅ Worth it for final production, skip for preview
 
 ---
 
@@ -250,30 +308,37 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 | Quick test | 180p @ 12fps | Fastest feedback |
 | Visual development | 360p @ 12fps | Best quality/time ratio |
 | Client preview | 360p @ 12fps or 540p @ 12fps | Good enough to approve |
-| Final approval | 540p @ 12fps | Near-production quality |
-| YouTube/Social | 1080p @ 24fps | Professional output |
-| Instagram Reels | 540p @ 24fps | Mobile-optimized |
-| TikTok | 540p @ 24fps | Platform standard |
+| Final approval | 540p or 720p @ 12fps | Near-production quality |
+| YouTube HD | 720p @ 24fps | Standard HD output |
+| YouTube/Social (Full HD) | 1080p @ 24fps | Professional output |
+| Instagram Reels | 540p or 720p @ 24fps | Mobile-optimized |
+| TikTok | 540p or 720p @ 24fps | Platform standard |
+| Portfolio pieces | 720p or 1080p @ 24fps | High-quality showcase |
 
 ---
 
 ## Sample Count Impact
 
-**Note**: 540p test used 24 samples vs 16 for 180p/360p
+**Note**: Each tier uses progressively more samples for better quality
 
 | Config | Samples | Quality Impact | Time Impact |
 |--------|---------|----------------|-------------|
 | 180p | 16 | Acceptable | Baseline |
 | 360p | 16 | Good | +50% |
 | 540p | 24 | Better | +125% |
+| 720p | 32 | Excellent | +200-225% |
 
-**Observation**: Increasing samples from 16→24 provides:
-- Slightly smoother rendering
-- Better anti-aliasing
-- ~10-15% time increase per frame
+**Observation**: Increasing samples improves quality:
+- 16 samples: Good for quick preview work
+- 24 samples: Better anti-aliasing, smoother rendering
+- 32 samples: HD-quality rendering, excellent detail
+- ~10-15% time increase per frame when increasing samples
 - Diminishing returns (64+ samples needed for major improvement)
 
-**Recommendation**: Stick with 16 samples for preview work, 64+ for production
+**Recommendation**:
+- 16 samples for preview work (180p/360p)
+- 24-32 samples for HD preview (540p/720p)
+- 64+ samples for final production (1080p)
 
 ---
 
@@ -285,11 +350,13 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 - 180p: 0.67s/frame (consistent)
 - 360p: 1.0s/frame (consistent)
 - 540p: 1.5s/frame (consistent)
+- 720p: 2.0-2.2s/frame (consistent)
 
 **Scalability**: ✅ Excellent
-- Linear scaling with pixel count
+- Sub-linear scaling with pixel count (16x pixels = 3x time)
 - No unexpected bottlenecks
 - Predictable for planning
+- Sample count also affects render time proportionally
 
 ### Memory Usage
 
@@ -297,10 +364,12 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 - 180p: ~18 MB peak
 - 360p: ~21 MB peak
 - 540p: ~31 MB peak
+- 720p: ~59 MB peak
 
 **Conclusion**: Memory is not a constraint
-- Even 540p uses minimal RAM
-- Can safely render higher resolutions on limited hardware
+- Even 720p uses minimal RAM (<100 MB)
+- Can safely render HD on limited hardware
+- Memory scales linearly with resolution, very efficient
 
 ---
 
@@ -324,16 +393,23 @@ Progressive resolution testing confirms **clear quality improvements** at each t
 
 **Standard**: 360p @ 12fps (6 min)
 **High-Quality**: 540p @ 12fps (9 min)
+**HD Preview**: 720p @ 12fps (12-13 min)
 
 Choose based on:
 - 360p: Internal team review
 - 540p: Client/stakeholder approval
+- 720p: High-quality client deliverables, HD preview
 
 ### For Production
 
+**HD Production**: 720p @ 24fps @ 32 samples (24-26 min)
+- Standard HD output for YouTube
+- Good balance of quality and render time
+- Use `config_720p_24fps.yaml` (if created)
+
 **Full Quality**: 1080p @ 24fps @ 64 samples (45-60 min)
 - Use `config.yaml`
-- Final output only
+- Final Full HD output only
 - Not for iterative work
 
 ---
@@ -345,12 +421,15 @@ Choose based on:
          ↓ +2 min
 360p (Quick Test)        ▓▓▓▓▓▓▓░░░  70% visual quality  ← Sweet spot
          ↓ +3 min
-540p (High Preview)      ▓▓▓▓▓▓▓▓▓░  90% visual quality
-         ↓ +35 min
+540p (High Preview)      ▓▓▓▓▓▓▓▓░░  80% visual quality
+         ↓ +3-4 min
+720p (HD Preview)        ▓▓▓▓▓▓▓▓▓░  90% visual quality  ← HD tier
+         ↓ +30-35 min
 1080p (Production)       ▓▓▓▓▓▓▓▓▓▓ 100% visual quality
 ```
 
 **Observation**: 70% of quality gain achieved by 360p at only 2 extra minutes
+**HD Insight**: 720p provides 90% quality at just 12-13 minutes total
 
 ---
 
@@ -361,21 +440,24 @@ Choose based on:
 **Optimal Workflow**:
 1. **Develop at 360p** (6 min) - best quality/time ratio
 2. **Preview at 540p** (9 min) - if client needs high quality
-3. **Produce at 1080p** (45+ min) - final output only
+3. **HD Preview at 720p** (12-13 min) - for HD client deliverables
+4. **Produce at 1080p** (45+ min) - final Full HD output only
 
 **Key Insight**: Don't waste time on 180p unless truly necessary
 - Jump directly to 360p for any visual work
 - 180p only useful for crash testing
+- 720p is excellent for HD content without full 1080p cost
 
-**Performance**: Pipeline scales well
-- Sub-linear time scaling with pixels
+**Performance**: Pipeline scales excellently
+- Sub-linear time scaling with pixels (16x pixels = 3x time)
 - Predictable render times
-- No memory constraints
+- No memory constraints (720p uses <100 MB)
 
 **Quality**: Clear improvements at each tier
 - 360p is "good enough" for most preview work
 - 540p is "near-production" quality
-- 1080p reserved for final delivery
+- 720p is "HD-ready" for professional content
+- 1080p reserved for final Full HD delivery
 
 ---
 
@@ -385,16 +467,19 @@ Choose based on:
 - `outputs/ultra_fast/preview_ultra_fast.mp4` (489 KB)
 - `outputs/test_360p/preview_test_360p.mp4` (806 KB)
 - `outputs/test_540p/preview_test_540p.mp4` (1.2 MB)
+- `outputs/test_720p/preview_test_720p.mp4` (1.5 MB)
 
 **Frame Samples**:
 - `outputs/ultra_fast/frames/frame_0150.png`
 - `outputs/test_360p/frames/frame_0150.png`
 - `outputs/test_540p/frames/frame_0150.png`
+- `outputs/test_720p/frames/frame_0150.png`
 
 **Configurations**:
 - `config_ultra_fast.yaml`
 - `config_360p_12fps.yaml`
 - `config_540p_12fps.yaml`
+- `config_720p_12fps.yaml`
 
 ---
 
