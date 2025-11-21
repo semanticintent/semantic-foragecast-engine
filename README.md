@@ -4,9 +4,15 @@
 >
 > A configuration-first, modular system demonstrating Blender automation, audio analysis integration, and headless rendering architecture.
 
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Blender 4.0+](https://img.shields.io/badge/blender-4.0+-orange.svg)](https://www.blender.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI Status](https://github.com/semanticintent/semantic-foragecast-engine/workflows/CI%20-%20Semantic%20Foragecast%20Engine/badge.svg)](https://github.com/semanticintent/semantic-foragecast-engine/actions)
+[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![GitHub Stars](https://img.shields.io/github/stars/semanticintent/semantic-foragecast-engine?style=social)](https://github.com/semanticintent/semantic-foragecast-engine/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/semanticintent/semantic-foragecast-engine)](https://github.com/semanticintent/semantic-foragecast-engine/issues)
+[![Documentation](https://img.shields.io/badge/docs-comprehensive-blue)](https://github.com/semanticintent/semantic-foragecast-engine#documentation)
 
 ---
 

@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as below."
+type: software
+title: "Semantic Foragecast Engine"
+abstract: "A production-ready pipeline for audio-driven procedural animation in Blender, demonstrating configuration-first architecture, headless rendering, and modular design patterns for automated video generation."
+authors:
+  - family-names: "Semantic Intent"
+    email: info@semanticintent.com
+repository-code: "https://github.com/semanticintent/semantic-foragecast-engine"
+url: "https://github.com/semanticintent/semantic-foragecast-engine"
+license: MIT
+version: 1.0.0
+date-released: "2025-01-21"
+keywords:
+  - blender
+  - animation
+  - audio-analysis
+  - video-generation
+  - procedural-animation
+  - lip-sync
+  - music-visualization
+  - automated-video
+  - grease-pencil
+  - blender-python
+  - headless-rendering
+  - pipeline-automation
+references:
+  - type: software
+    title: "LibROSA: Audio and Music Signal Analysis in Python"
+    authors:
+      - family-names: "McFee"
+        given-names: "Brian"
+    url: "https://librosa.org/"
+  - type: software
+    title: "Blender"
+    authors:
+      - name: "Blender Foundation"
+    url: "https://www.blender.org/"
+  - type: software
+    title: "Rhubarb Lip Sync"
+    authors:
+      - family-names: "Wolf"
+        given-names: "Daniel"
+    url: "https://github.com/DanielSWolf/rhubarb-lip-sync"
+preferred-citation:
+  type: software
+  title: "Semantic Foragecast Engine: A Configuration-First Pipeline for Audio-Driven Animation"
+  authors:
+    - family-names: "Semantic Intent"
+      email: info@semanticintent.com
+  year: 2025
+  version: 1.0.0
+  repository-code: "https://github.com/semanticintent/semantic-foragecast-engine"
+  license: MIT
+  url: "https://github.com/semanticintent/semantic-foragecast-engine"
