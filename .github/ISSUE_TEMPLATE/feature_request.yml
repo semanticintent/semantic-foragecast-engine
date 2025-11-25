@@ -1,0 +1,130 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for Semantic Foragecast Engine
+title: "[Feature]: "
+labels: ["enhancement", "needs-discussion"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide as much detail as possible.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A brief, clear description of the feature you'd like to see
+      placeholder: Add support for 3D mesh animation mode
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What's your use case?
+      placeholder: |
+        I'm trying to create more realistic character animations, but the current 2D mode...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this feature to work?
+      placeholder: |
+        Add a new animation mode `mode: "3d"` that:
+        1. Creates a 3D mesh from the input image
+        2. Rigs it with bones
+        3. Animates based on phonemes and beats
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative approaches?
+      placeholder: I also thought about using particle systems, but...
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - Animation Mode
+        - Audio Analysis
+        - Visual Effect
+        - Performance Optimization
+        - Configuration Option
+        - Documentation
+        - Developer Experience
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority (Your Opinion)
+      description: How important is this feature to you?
+      options:
+        - Critical (Blocking my use case)
+        - High (Would greatly improve my workflow)
+        - Medium (Nice to have)
+        - Low (Minor improvement)
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples / Mockups
+      description: Links to similar features in other tools, mockups, or example outputs
+      placeholder: |
+        Similar to how Tool X handles this:
+        https://example.com/feature
+
+        Or here's a mockup of the config I envision:
+        ```yaml
+        animation:
+          mode: "3d"
+          mesh_detail: high
+        ```
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact & Benefits
+      description: Who would benefit from this feature? What's the expected impact?
+      placeholder: |
+        - Benefit users who need realistic animations
+        - Would enable use case X
+        - Could attract Y type of users
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you be willing to help implement this?
+      options:
+        - label: I would like to implement this feature myself
+        - label: I can help with testing
+        - label: I can help with documentation
+        - label: I can provide sample data/files
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have checked the roadmap to see if this is already planned
+          required: true
+        - label: This feature aligns with the project's goals
+          required: false

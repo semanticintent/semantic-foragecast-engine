@@ -1,0 +1,94 @@
+name: Question / Help
+description: Ask a question or get help using Semantic Foragecast Engine
+title: "[Question]: "
+labels: ["question", "needs-response"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your question! Please provide details below so we can help you.
+
+        **Note**: For general discussions, consider using [GitHub Discussions](https://github.com/semanticintent/semantic-foragecast-engine/discussions) instead.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: How do I configure the pipeline to generate 4K videos?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Topic Area
+      description: What aspect of the project is your question about?
+      options:
+        - Installation / Setup
+        - Configuration
+        - Audio Processing
+        - Blender Integration
+        - Video Export
+        - Performance / Optimization
+        - Troubleshooting
+        - Best Practices
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & Background
+      description: What are you trying to accomplish? What have you tried so far?
+      placeholder: |
+        I'm trying to create high-quality lyric videos for my music.
+        I've successfully run the quick test, but when I try to increase resolution...
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What You've Tried
+      description: What solutions have you already attempted?
+      placeholder: |
+        - Tried changing resolution to [3840, 2160]
+        - Increased samples to 128
+        - Read TESTING_GUIDE.md
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Relevant Configuration (if applicable)
+      description: Share your config file if relevant to your question
+      render: yaml
+      placeholder: |
+        video:
+          resolution: [1920, 1080]
+          # ... relevant parts of config
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details (if relevant)
+      description: OS, Python version, Blender version, etc.
+      placeholder: |
+        - OS: Ubuntu 22.04
+        - Python: 3.11.5
+        - Blender: 4.0.2
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm you've done the following
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: I have read the relevant documentation
+          required: true
+        - label: This is a question, not a bug report or feature request
+          required: true

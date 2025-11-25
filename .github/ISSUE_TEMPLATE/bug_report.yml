@@ -1,0 +1,136 @@
+name: Bug Report
+description: Report a bug or issue with Semantic Foragecast Engine
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below to help us investigate.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Tell us what went wrong
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions to reproduce the issue
+      placeholder: |
+        1. Run command '...'
+        2. Use config '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: The pipeline should complete successfully
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: The pipeline crashed with error X
+    validations:
+      required: true
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration File
+      description: Please paste your config.yaml (remove any sensitive data)
+      render: yaml
+      placeholder: |
+        video:
+          resolution: [1920, 1080]
+          fps: 24
+        # ... rest of config
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Messages / Logs
+      description: Please paste any relevant error messages or log output
+      render: shell
+      placeholder: Paste error messages here
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Which phase fails?
+      description: Which part of the pipeline has the issue?
+      options:
+        - Phase 1 (Audio Preprocessing)
+        - Phase 2 (Blender Rendering)
+        - Phase 3 (Video Export)
+        - Not sure
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you using?
+      placeholder: e.g., Ubuntu 22.04, Windows 11, macOS 14
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python Version
+      description: Output of `python --version`
+      placeholder: e.g., Python 3.11.5
+    validations:
+      required: true
+
+  - type: input
+    id: blender-version
+    attributes:
+      label: Blender Version
+      description: Output of `blender --version` (if applicable)
+      placeholder: e.g., Blender 4.0.2
+
+  - type: input
+    id: ffmpeg-version
+    attributes:
+      label: FFmpeg Version
+      description: Output of `ffmpeg -version` (first line)
+      placeholder: e.g., ffmpeg version 4.4.2
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context, screenshots, or sample files that might help
+      placeholder: Add any other context about the problem here
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have included all relevant information above
+          required: true
+        - label: I have tested with the latest version
+          required: false

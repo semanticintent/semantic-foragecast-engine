@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/semanticintent/semantic-foragecast-engine/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Documentation
+    url: https://github.com/semanticintent/semantic-foragecast-engine#documentation
+    about: Read the comprehensive documentation and guides
+  - name: Security Issues
+    url: https://github.com/semanticintent/semantic-foragecast-engine/security/policy
+    about: Report security vulnerabilities privately
