@@ -13,6 +13,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/semanticintent/semantic-foragecast-engine?style=social)](https://github.com/semanticintent/semantic-foragecast-engine/stargazers)
 [![GitHub Issues](https://img.shields.io/github/issues/semanticintent/semantic-foragecast-engine)](https://github.com/semanticintent/semantic-foragecast-engine/issues)
 [![Documentation](https://img.shields.io/badge/docs-comprehensive-blue)](https://github.com/semanticintent/semantic-foragecast-engine#documentation)
+[![Featured](https://img.shields.io/badge/Featured-LinkedIn-0077B5)](https://foragecast.dev)
 
 ---
 
