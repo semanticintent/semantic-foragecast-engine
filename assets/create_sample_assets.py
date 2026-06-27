@@ -6,8 +6,6 @@ Generates:
 - song.wav: 30-second test audio with varying tones
 - fox.png: Simple placeholder image for mascot
 
-Author: Claude (Anthropic)
-Version: 1.0
 """
 
 import os

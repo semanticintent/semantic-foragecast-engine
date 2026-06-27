@@ -1,18 +1,16 @@
-name: CI - Semantic Foragecast Engine
+name: CI
 
 on:
   push:
-    branches: [ main, develop, claude/* ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
-  workflow_dispatch:  # Allow manual triggering
+    branches: [main, develop]
+  workflow_dispatch:
 
 jobs:
-  # Phase 1: Unit Tests
   unit-tests:
-    name: Unit Tests - Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: Unit Tests — Python ${{ matrix.python-version }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-
     strategy:
       fail-fast: false
       matrix:
@@ -20,53 +18,45 @@ jobs:
         python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'pip'
+        cache: pip
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pytest pytest-cov pytest-xdist
+        pip install pytest pytest-cov
 
     - name: Run Phase 1 unit tests
-      run: |
-        pytest tests/test_prep_audio.py -v --cov=prep_audio --cov-report=xml --cov-report=term
+      run: pytest tests/test_prep_audio.py -v --cov=prep_audio --cov-report=xml
 
-    - name: Upload coverage to Codecov
+    - name: Upload coverage
       if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
       uses: codecov/codecov-action@v4
       with:
         file: ./coverage.xml
         flags: unittests
-        name: codecov-umbrella
 
-  # Phase 2: E2E Tests
   e2e-tests:
-    name: E2E Tests - Python ${{ matrix.python-version }}
+    name: E2E Tests — Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     needs: unit-tests
-
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.10', '3.11']
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'pip'
+        cache: pip
 
     - name: Install dependencies
       run: |
@@ -74,86 +64,45 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
 
-    - name: Run E2E test suite
-      run: |
-        python tests/test_e2e_pipeline.py
+    - name: Run E2E suite
+      run: python tests/test_e2e_pipeline.py
 
-    - name: Upload E2E test results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: e2e-test-results-py${{ matrix.python-version }}
-        path: |
-          tests/
-          !tests/__pycache__/
-
-  # Phase 3: Blender Integration Smoke Tests
-  blender-smoke-tests:
-    name: Blender Smoke Tests
+  compositor-tests:
+    name: Compositor Tests
     runs-on: ubuntu-latest
     needs: unit-tests
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-        cache: 'pip'
+        cache: pip
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install pytest pytest-cov
 
-    - name: Install Blender
+    - name: Run compositor + sprite generator tests
       run: |
-        sudo apt-get update
-        sudo apt-get install -y wget xz-utils
+        pytest tests/test_compose_animation.py tests/test_generate_sprites.py -v --cov=compose_animation --cov-report=xml
+      continue-on-error: true  # remove once tests exist
 
-        # Download Blender 4.0 LTS
-        BLENDER_VERSION="4.0.2"
-        BLENDER_URL="https://download.blender.org/release/Blender4.0/blender-${BLENDER_VERSION}-linux-x64.tar.xz"
-
-        wget -q $BLENDER_URL -O blender.tar.xz
-        tar -xf blender.tar.xz
-
-        # Add to PATH
-        echo "$(pwd)/blender-${BLENDER_VERSION}-linux-x64" >> $GITHUB_PATH
-
-    - name: Verify Blender installation
-      run: |
-        blender-4.0.2-linux-x64/blender --version
-
-    - name: Test Blender script syntax
-      run: |
-        # Just check if the script can be parsed by Blender
-        blender-4.0.2-linux-x64/blender --background --python-expr "import bpy; print('Blender Python OK')"
-
-    - name: Validate Blender scripts
-      run: |
-        # Check if scripts are valid Python
-        python -m py_compile blender_script.py
-        python -m py_compile grease_pencil.py
-        echo "✓ Blender scripts validated"
-
-  # Phase 4: Video Export Tests
   video-export-tests:
     name: Video Export Tests
     runs-on: ubuntu-latest
     needs: unit-tests
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-        cache: 'pip'
+        cache: pip
 
     - name: Install dependencies
       run: |
@@ -163,127 +112,85 @@ jobs:
 
     - name: Install FFmpeg
       run: |
-        sudo apt-get update
-        sudo apt-get install -y ffmpeg
-        ffmpeg -version
+        sudo apt-get update && sudo apt-get install -y ffmpeg
 
     - name: Run video export tests
-      run: |
-        pytest tests/test_export_video.py -v
+      run: pytest tests/test_export_video.py -v
 
-    - name: Upload test artifacts
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: video-export-artifacts
-        path: outputs/
-
-  # Phase 5: Linting and Code Quality
   code-quality:
-    name: Code Quality Checks
+    name: Code Quality
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
-    - name: Install linting tools
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pylint black isort mypy
+    - name: Install linters
+      run: pip install flake8 black isort
 
-    - name: Run flake8
+    - name: flake8 (errors only)
+      run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       continue-on-error: true
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=15 --max-line-length=120 --statistics
 
-    - name: Check code formatting with black
+    - name: black (check)
+      run: black --check --line-length=100 *.py
       continue-on-error: true
-      run: |
-        black --check --line-length=100 *.py
 
-    - name: Check import sorting with isort
+    - name: isort (check)
+      run: isort --check-only --profile=black *.py
       continue-on-error: true
-      run: |
-        isort --check-only --profile=black *.py
 
-  # Phase 6: Security Scanning
   security-scan:
-    name: Security Vulnerability Scan
+    name: Security Scan
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements.txt bandit
 
-    - name: Run safety check
+    - name: Run bandit
+      run: bandit -r . -f json -o bandit-report.json || true
       continue-on-error: true
-      run: |
-        pip install safety
-        safety check --json || true
 
-    - name: Run bandit security scan
-      continue-on-error: true
-      run: |
-        pip install bandit
-        bandit -r . -f json -o bandit-report.json || true
-
-    - name: Upload security reports
+    - name: Upload security report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: security-reports
-        path: |
-          bandit-report.json
+        name: security-report
+        path: bandit-report.json
 
-  # Summary job
   ci-summary:
     name: CI Summary
     runs-on: ubuntu-latest
-    needs: [unit-tests, e2e-tests, blender-smoke-tests, video-export-tests, code-quality, security-scan]
+    needs: [unit-tests, e2e-tests, compositor-tests, video-export-tests, code-quality, security-scan]
     if: always()
 
     steps:
-    - name: Check job statuses
+    - name: Report
       run: |
-        echo "==================================================="
-        echo "CI Pipeline Summary - Semantic Foragecast Engine"
-        echo "==================================================="
-        echo ""
-        echo "Unit Tests:            ${{ needs.unit-tests.result }}"
-        echo "E2E Tests:             ${{ needs.e2e-tests.result }}"
-        echo "Blender Smoke Tests:   ${{ needs.blender-smoke-tests.result }}"
-        echo "Video Export Tests:    ${{ needs.video-export-tests.result }}"
-        echo "Code Quality:          ${{ needs.code-quality.result }}"
-        echo "Security Scan:         ${{ needs.security-scan.result }}"
-        echo ""
-        echo "==================================================="
+        echo "=== CI Summary — Semantic Foragecast Engine ==="
+        echo "Unit Tests:         ${{ needs.unit-tests.result }}"
+        echo "E2E Tests:          ${{ needs.e2e-tests.result }}"
+        echo "Compositor Tests:   ${{ needs.compositor-tests.result }}"
+        echo "Video Export Tests: ${{ needs.video-export-tests.result }}"
+        echo "Code Quality:       ${{ needs.code-quality.result }}"
+        echo "Security Scan:      ${{ needs.security-scan.result }}"
 
-        # Fail if critical jobs failed
         if [ "${{ needs.unit-tests.result }}" != "success" ]; then
-          echo "❌ Unit tests failed"
-          exit 1
+          echo "Unit tests failed"; exit 1
         fi
-
         if [ "${{ needs.e2e-tests.result }}" != "success" ]; then
-          echo "❌ E2E tests failed"
-          exit 1
+          echo "E2E tests failed"; exit 1
         fi
-
-        echo "✅ All critical tests passed!"
+        echo "All critical tests passed."

@@ -9,19 +9,18 @@ This module handles video encoding using FFmpeg:
 3. Generate final MP4 output
 4. Support multiple codecs and quality settings
 
-Author: Claude (Anthropic)
-Version: 3.0
-Date: November 2025
-Platform: Cross-platform (Windows 11 optimized)
 """
 
 import os
 import sys
 import subprocess
 import glob
+import logging
 from pathlib import Path
 from typing import Optional, List, Dict
 import shutil
+
+logger = logging.getLogger(__name__)
 
 
 class VideoExporter:
@@ -74,14 +73,15 @@ class VideoExporter:
         if not os.path.exists(frames_dir):
             return False, 0
 
-        # Look for common frame patterns
+        # Look for common frame patterns (use a set to avoid double-counting)
         patterns = ['frame_*.png', '*.png', 'frame_*.jpg', '*.jpg']
-        frames = []
+        frames = set()
 
         for pattern in patterns:
-            frames.extend(glob.glob(os.path.join(frames_dir, pattern)))
+            frames.update(glob.glob(os.path.join(frames_dir, pattern)))
 
-        return len(frames) > 0, len(frames)
+        count = len(frames)
+        return count > 0, count
 
     def encode_video(
         self,
@@ -109,24 +109,24 @@ class VideoExporter:
             True if successful, False otherwise
         """
         if not self.ffmpeg_path:
-            print("ERROR: FFmpeg not found. Install FFmpeg and add to PATH.")
-            print("Download from: https://ffmpeg.org/download.html")
+            logger.error("FFmpeg not found. Install FFmpeg and add to PATH.")
+            logger.error("Download from: https://ffmpeg.org/download.html")
             return False
 
         # Validate inputs
         frames_exist, frame_count = self.validate_frames(frames_dir)
         if not frames_exist:
-            print(f"ERROR: No frames found in {frames_dir}")
+            logger.error(f"No frames found in {frames_dir}")
             return False
 
         if not os.path.exists(audio_path):
-            print(f"ERROR: Audio file not found: {audio_path}")
+            logger.error(f"Audio file not found: {audio_path}")
             return False
 
-        print(f"Encoding video from {frame_count} frames...")
-        print(f"  Codec: {codec}")
-        print(f"  Quality: {quality}")
-        print(f"  FPS: {fps}")
+        logger.info(f"Encoding video from {frame_count} frames...")
+        logger.info(f"Codec: {codec}")
+        logger.info(f"Quality: {quality}")
+        logger.info(f"FPS: {fps}")
 
         # Build FFmpeg command
         cmd = [self.ffmpeg_path]
@@ -137,7 +137,7 @@ class VideoExporter:
         # Frame input pattern (try different patterns)
         frame_pattern = self._detect_frame_pattern(frames_dir)
         if not frame_pattern:
-            print(f"ERROR: Could not detect frame pattern in {frames_dir}")
+            logger.error(f"Could not detect frame pattern in {frames_dir}")
             return False
 
         cmd.extend(['-i', frame_pattern])
@@ -174,7 +174,7 @@ class VideoExporter:
         # Output
         cmd.append(output_path)
 
-        print(f"Running FFmpeg: {' '.join(cmd)}")
+        logger.debug(f"Running FFmpeg: {' '.join(cmd)}")
 
         # Execute FFmpeg
         try:
@@ -186,29 +186,28 @@ class VideoExporter:
             )
 
             if result.returncode != 0:
-                print(f"ERROR: FFmpeg failed with code {result.returncode}")
+                logger.error(f"FFmpeg failed with code {result.returncode}")
                 if result.stderr:
-                    print("FFmpeg error output:")
-                    print(result.stderr)
+                    logger.error(f"FFmpeg error output:\n{result.stderr}")
                 return False
 
             # Check output file exists
             if not os.path.exists(output_path):
-                print("ERROR: Output file was not created")
+                logger.error("Output file was not created")
                 return False
 
             file_size = os.path.getsize(output_path)
-            print(f"[OK] Video encoded successfully")
-            print(f"  Output: {output_path}")
-            print(f"  Size: {file_size:,} bytes ({file_size / 1024 / 1024:.2f} MB)")
+            logger.info("Video encoded successfully")
+            logger.info(f"Output: {output_path}")
+            logger.info(f"Size: {file_size:,} bytes ({file_size / 1024 / 1024:.2f} MB)")
 
             return True
 
         except subprocess.TimeoutExpired:
-            print("ERROR: FFmpeg encoding timed out (>10 minutes)")
+            logger.error("FFmpeg encoding timed out (>10 minutes)")
             return False
         except Exception as e:
-            print(f"ERROR: FFmpeg execution failed: {str(e)}")
+            logger.error(f"FFmpeg execution failed: {str(e)}")
             return False
 
     def _detect_frame_pattern(self, frames_dir: str) -> Optional[str]:
@@ -298,15 +297,15 @@ class VideoExporter:
             True if successful, False otherwise
         """
         if not self.ffmpeg_path:
-            print("ERROR: FFmpeg not found")
+            logger.error("FFmpeg not found")
             return False
 
         frames_exist, frame_count = self.validate_frames(frames_dir)
         if not frames_exist:
-            print(f"ERROR: No frames found in {frames_dir}")
+            logger.error(f"No frames found in {frames_dir}")
             return False
 
-        print(f"Creating preview video (scale: {scale})...")
+        logger.info(f"Creating preview video (scale: {scale})...")
 
         frame_pattern = self._detect_frame_pattern(frames_dir)
         if not frame_pattern:
@@ -334,14 +333,14 @@ class VideoExporter:
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
 
             if result.returncode == 0 and os.path.exists(output_path):
-                print(f"[OK] Preview created: {output_path}")
+                logger.info(f"Preview created: {output_path}")
                 return True
             else:
-                print("ERROR: Preview creation failed")
+                logger.error("Preview creation failed")
                 return False
 
         except Exception as e:
-            print(f"ERROR: {str(e)}")
+            logger.error(f"Preview creation error: {str(e)}")
             return False
 
 
@@ -378,9 +377,9 @@ def export_video_from_config(config: Dict, prep_data: Optional[Dict] = None) -> 
         preview_scale = config.get('advanced', {}).get('preview_scale', 0.5)
         preview_path = os.path.join(output_dir, 'preview_' + video_name)
 
-        print("=" * 70)
-        print("CREATING PREVIEW VIDEO")
-        print("=" * 70)
+        logger.info("=" * 70)
+        logger.info("CREATING PREVIEW VIDEO")
+        logger.info("=" * 70)
 
         success = exporter.create_preview(
             frames_dir=frames_dir,
@@ -392,9 +391,9 @@ def export_video_from_config(config: Dict, prep_data: Optional[Dict] = None) -> 
 
         return success
     else:
-        print("=" * 70)
-        print("ENCODING FINAL VIDEO")
-        print("=" * 70)
+        logger.info("=" * 70)
+        logger.info("ENCODING FINAL VIDEO")
+        logger.info("=" * 70)
 
         success = exporter.encode_video(
             frames_dir=frames_dir,

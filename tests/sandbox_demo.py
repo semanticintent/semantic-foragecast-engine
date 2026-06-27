@@ -8,9 +8,6 @@ This script:
 3. Runs all prep_audio functions
 4. Prints JSON output
 
-Author: Claude (Anthropic)
-Version: 1.0
-Date: November 2025
 """
 
 import os

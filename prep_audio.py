@@ -10,10 +10,6 @@ This module:
 - Parses lyrics TXT files to timed words
 - Outputs structured JSON for downstream processing
 
-Author: Claude (Anthropic)
-Version: 1.0
-Date: November 2025
-Platform: Cross-platform (Windows 11 optimized)
 """
 
 import os
@@ -27,8 +23,12 @@ import warnings
 import numpy as np
 import librosa
 
+import logging
+
 # Suppress librosa warnings for cleaner output
 warnings.filterwarnings('ignore', category=UserWarning)
+
+logger = logging.getLogger(__name__)
 
 
 class AudioPreprocessor:
@@ -98,11 +98,16 @@ class AudioPreprocessor:
         # Detect beats (with fallback for compatibility issues)
         try:
             tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
+            # librosa ≥0.10 may return tempo as a 1-element ndarray
+            if hasattr(tempo, '__len__'):
+                tempo = float(tempo[0])
+            else:
+                tempo = float(tempo)
             beat_times = librosa.frames_to_time(beat_frames, sr=sr)
         except (AttributeError, Exception) as e:
             # Fallback: use onsets as beats if beat tracking fails
             # This can happen with scipy version incompatibilities
-            print(f"  WARNING: Beat tracking failed ({str(e)}), using onsets as beats")
+            logger.warning(f"Beat tracking failed ({str(e)}), using onsets as beats")
             beat_frames = onset_frames
             beat_times = onset_times
 
@@ -182,7 +187,7 @@ class PhonemeExtractor:
         if self.rhubarb_path:
             return self._extract_with_rhubarb(audio_path)
         else:
-            print("WARNING: Rhubarb not found. Using mock phoneme data.")
+            logger.warning("Rhubarb not found. Using mock phoneme data.")
             return self._generate_mock_phonemes(audio_path)
 
     def _extract_with_rhubarb(self, audio_path: str) -> List[Dict]:
@@ -216,7 +221,7 @@ class PhonemeExtractor:
             )
 
             if result.returncode != 0:
-                print(f"WARNING: Rhubarb failed: {result.stderr}")
+                logger.warning(f"Rhubarb failed: {result.stderr}")
                 return self._generate_mock_phonemes(audio_path)
 
             # Parse DAT output
@@ -228,7 +233,7 @@ class PhonemeExtractor:
             return phonemes
 
         except Exception as e:
-            print(f"WARNING: Rhubarb extraction failed: {str(e)}")
+            logger.warning(f"Rhubarb extraction failed: {str(e)}")
             return self._generate_mock_phonemes(audio_path)
 
     def _parse_rhubarb_dat(self, dat_path: str) -> List[Dict]:
@@ -333,7 +338,7 @@ class LyricsParser:
         lyrics_path = os.path.normpath(lyrics_path)
 
         if not os.path.exists(lyrics_path):
-            print(f"WARNING: Lyrics file not found: {lyrics_path}")
+            logger.warning(f"Lyrics file not found: {lyrics_path}")
             return []
 
         try:
@@ -343,7 +348,7 @@ class LyricsParser:
             return LyricsParser._parse_content(content)
 
         except Exception as e:
-            print(f"WARNING: Failed to parse lyrics: {str(e)}")
+            logger.warning(f"Failed to parse lyrics: {str(e)}")
             return []
 
     @staticmethod
@@ -423,7 +428,7 @@ class LyricsParser:
             return timed_words
 
         except Exception as e:
-            print(f"WARNING: Failed to parse line '{line}': {str(e)}")
+            logger.warning(f"Failed to parse line '{line}': {str(e)}")
             return []
 
     @staticmethod
@@ -494,34 +499,34 @@ def process_audio(
     # Normalize paths for cross-platform compatibility
     audio_path = os.path.normpath(audio_path)
 
-    print(f"Processing audio: {audio_path}")
+    logger.info(f"Processing audio: {audio_path}")
 
     # Load and analyze audio
     preprocessor = AudioPreprocessor()
     y, sr = preprocessor.load_audio(audio_path)
     duration = librosa.get_duration(y=y, sr=sr)
 
-    print(f"  Duration: {duration:.2f}s, Sample Rate: {sr} Hz")
+    logger.info(f"Duration: {duration:.2f}s, Sample Rate: {sr} Hz")
 
     # Detect beats
-    print("  Detecting beats and onsets...")
+    logger.info("Detecting beats and onsets...")
     beats_data = preprocessor.detect_beats(y, sr)
-    print(f"  Found {len(beats_data['beat_times'])} beats, {len(beats_data['onset_times'])} onsets")
-    print(f"  Estimated tempo: {beats_data['tempo']:.1f} BPM")
+    logger.info(f"Found {len(beats_data['beat_times'])} beats, {len(beats_data['onset_times'])} onsets")
+    logger.info(f"Estimated tempo: {beats_data['tempo']:.1f} BPM")
 
     # Extract phonemes
-    print("  Extracting phonemes...")
+    logger.info("Extracting phonemes...")
     extractor = PhonemeExtractor(rhubarb_path)
     phonemes = extractor.extract_phonemes(audio_path)
-    print(f"  Found {len(phonemes)} phoneme transitions")
+    logger.info(f"Found {len(phonemes)} phoneme transitions")
 
     # Parse lyrics
     timed_words = []
     if lyrics_path:
-        print(f"  Parsing lyrics: {lyrics_path}")
+        logger.info(f"Parsing lyrics: {lyrics_path}")
         parser = LyricsParser()
         timed_words = parser.parse_lyrics(lyrics_path)
-        print(f"  Found {len(timed_words)} timed words")
+        logger.info(f"Found {len(timed_words)} timed words")
 
     # Compile results
     result = {
@@ -546,7 +551,7 @@ def process_audio(
         output_json = os.path.normpath(output_json)
         with open(output_json, 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=2)
-        print(f"\nResults saved to: {output_json}")
+        logger.info(f"Results saved to: {output_json}")
 
     return result
 
@@ -572,13 +577,12 @@ if __name__ == '__main__':
         output_json=args.output
     )
 
-    print(f"\n{'='*60}")
-    print("PROCESSING COMPLETE")
-    print(f"{'='*60}")
-    print(f"Audio Duration: {result['audio']['duration']}s")
-    print(f"Tempo: {result['audio']['tempo']:.1f} BPM")
-    print(f"Beats: {len(result['beats']['beat_times'])}")
-    print(f"Onsets: {len(result['beats']['onset_times'])}")
-    print(f"Phonemes: {len(result['phonemes'])}")
-    print(f"Timed Words: {len(result['timed_words'])}")
-    print(f"{'='*60}\n")
+    logger.info("=" * 60)
+    logger.info("PROCESSING COMPLETE")
+    logger.info("=" * 60)
+    logger.info(f"Audio Duration: {result['audio']['duration']}s")
+    logger.info(f"Tempo: {result['audio']['tempo']:.1f} BPM")
+    logger.info(f"Beats: {len(result['beats']['beat_times'])}")
+    logger.info(f"Onsets: {len(result['beats']['onset_times'])}")
+    logger.info(f"Phonemes: {len(result['phonemes'])}")
+    logger.info(f"Timed Words: {len(result['timed_words'])}")

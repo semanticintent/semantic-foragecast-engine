@@ -4,8 +4,6 @@ Create test frames for Phase 3 testing.
 
 Generates simple colored frames for testing video export.
 
-Author: Claude (Anthropic)
-Version: 1.0
 """
 
 import os

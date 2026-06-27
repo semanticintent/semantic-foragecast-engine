@@ -1,6 +1,13 @@
-librosa==0.10.1
-pydub==0.25.1
-pyyaml==6.0.1
-numpy==1.26.4
+# Core pipeline dependencies — keep in sync with pyproject.toml [project.dependencies]
+librosa>=0.10.1
+pydub>=0.25.1
+pyyaml>=6.0.1
+numpy>=1.26.0,<3.0.0
 scipy>=1.11.0
 soundfile>=0.12.1
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Optional: automatic lyrics transcription
+# openai-whisper>=20230314
+# torch>=2.0.0

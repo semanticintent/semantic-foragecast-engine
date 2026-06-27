@@ -4,9 +4,6 @@ Unit tests for export_video.py
 
 Tests video export functionality, FFmpeg integration, and frame handling.
 
-Author: Claude (Anthropic)
-Version: 1.0
-Date: November 2025
 """
 
 import os

@@ -42,27 +42,26 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
-/tmp/
 
-# Outputs (keep structure but ignore large files)
-outputs/*.mp4
-outputs/*.avi
-outputs/frames/
-
-# Blender
+# Pipeline outputs
+outputs/
+demo_reel/
+frames/
 *.blend1
 *.blend2
 
-# Exclude large rendered frame directories
-demo_reel/*/frames/
-outputs/*/frames/
+# Generated pipeline data
+prep_data.json
+pipeline_run.log
 
-# Exclude generated output files
-demo_reel/*/prep_data.json
-demo_reel/*/*.mp4
-demo_reel/*/*.avi
+# Test outputs
+tests/outputs/
+tests/frames/
 
-# Exclude test output directories
-outputs/*/prep_data.json
-outputs/*/*.mp4
-outputs/*/*.avi
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environment (project-local)
+.venv/

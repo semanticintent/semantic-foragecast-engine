@@ -5,9 +5,6 @@ Unit tests for prep_audio.py
 Tests audio processing, beat detection, phoneme extraction, and lyrics parsing.
 Includes mock WAV generation for sandbox testing.
 
-Author: Claude (Anthropic)
-Version: 1.0
-Date: November 2025
 """
 
 import os

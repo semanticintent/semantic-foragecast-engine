@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "semantic-foragecast-engine"
 version = "1.0.0"
-description = "Production-ready pipeline for audio-driven animation in Blender"
+description = "Audio-driven mascot animation pipeline: beat detection, lip-sync, sprite compositing, video export"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
@@ -15,16 +15,16 @@ maintainers = [
     {name = "Semantic Intent", email = "info@semanticintent.com"}
 ]
 keywords = [
-    "blender",
     "animation",
+    "mascot",
     "audio-analysis",
     "video-generation",
-    "procedural-animation",
     "lip-sync",
+    "sprite-animation",
     "music-visualization",
     "automated-video",
-    "grease-pencil",
-    "blender-python"
+    "beat-detection",
+    "rhubarb"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -37,7 +37,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Multimedia :: Graphics :: 3D Rendering",
+    "Topic :: Multimedia :: Graphics",
     "Topic :: Multimedia :: Sound/Audio :: Analysis",
     "Topic :: Multimedia :: Video",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -48,9 +48,11 @@ dependencies = [
     "librosa>=0.10.1",
     "pydub>=0.25.1",
     "pyyaml>=6.0.1",
-    "numpy>=1.26.0,<2.0.0",
+    "numpy>=1.26.0,<3.0.0",
     "scipy>=1.11.0",
-    "soundfile>=0.12.1"
+    "soundfile>=0.12.1",
+    "Pillow>=10.0.0",
+    "opencv-python>=4.8.0"
 ]
 
 [project.optional-dependencies]
@@ -67,8 +69,7 @@ dev = [
     "isort>=5.12.0",
     "mypy>=1.5.0",
     "bandit>=1.7.5",
-    "pre-commit>=3.3.3",
-    "Pillow>=10.0.0"
+    "pre-commit>=3.3.3"
 ]
 all = [
     "semantic-foragecast-engine[lyrics,dev]"
@@ -85,10 +86,10 @@ Changelog = "https://github.com/semanticintent/semantic-foragecast-engine/blob/m
 semantic-foragecast = "main:main"
 
 [tool.setuptools]
-packages = ["semantic_foragecast_engine"]
+py_modules = ["main", "prep_audio", "export_video", "compose_animation", "generate_sprites"]
 
 [tool.setuptools.package-data]
-semantic_foragecast_engine = ["*.yaml", "*.md"]
+"*" = ["*.yaml"]
 
 [tool.black]
 line-length = 100
@@ -138,7 +139,6 @@ markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
     "e2e: marks tests as end-to-end tests",
-    "blender: marks tests that require Blender",
     "ffmpeg: marks tests that require FFmpeg"
 ]
 
