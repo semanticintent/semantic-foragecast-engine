@@ -31,20 +31,22 @@ from PIL import Image, ImageDraw
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-# 9 Rhubarb phoneme mouth shapes, described as (openness_ratio, width_ratio, shape)
-# openness_ratio: vertical opening as fraction of sprite height (0 = closed, 1 = fully open)
-# width_ratio: horizontal width as fraction of sprite width
-# shape: 'oval' | 'pressed' | 'narrow' | 'wide' | 'round' | 'lip'
+# 9 Rhubarb phoneme mouth shapes
+# openness: vertical opening as fraction of sprite height (0=closed, 1=fully open)
+# width:    horizontal opening as fraction of sprite width
+# shape:    controls cavity geometry
+# teeth:    show upper teeth strip
+# tongue:   show tongue at cavity bottom
 PHONEME_SHAPES = {
-    "X": {"openness": 0.00, "width": 0.85, "shape": "pressed"},   # silence / rest
-    "A": {"openness": 0.65, "width": 0.80, "shape": "oval"},      # "father"
-    "B": {"openness": 0.02, "width": 0.88, "shape": "pressed"},   # "bad" / M / P
-    "C": {"openness": 0.40, "width": 0.75, "shape": "oval"},      # "cut"
-    "D": {"openness": 0.25, "width": 0.72, "shape": "oval"},      # "dead"
-    "E": {"openness": 0.30, "width": 0.95, "shape": "wide"},      # "bed" — teeth showing
-    "F": {"openness": 0.15, "width": 0.70, "shape": "lip"},       # "fat" — bottom lip up
-    "G": {"openness": 0.45, "width": 0.60, "shape": "narrow"},    # "good"
-    "H": {"openness": 0.55, "width": 0.68, "shape": "round"},     # "hot"
+    "X": {"openness": 0.00, "width": 0.82, "shape": "closed",  "teeth": False, "tongue": False},
+    "A": {"openness": 0.62, "width": 0.78, "shape": "oval",    "teeth": True,  "tongue": True},
+    "B": {"openness": 0.00, "width": 0.85, "shape": "pressed", "teeth": False, "tongue": False},
+    "C": {"openness": 0.36, "width": 0.72, "shape": "oval",    "teeth": True,  "tongue": False},
+    "D": {"openness": 0.20, "width": 0.68, "shape": "oval",    "teeth": False, "tongue": False},
+    "E": {"openness": 0.26, "width": 0.92, "shape": "wide",    "teeth": True,  "tongue": False},
+    "F": {"openness": 0.14, "width": 0.64, "shape": "lip",     "teeth": True,  "tongue": False},
+    "G": {"openness": 0.42, "width": 0.54, "shape": "narrow",  "teeth": False, "tongue": False},
+    "H": {"openness": 0.48, "width": 0.62, "shape": "round",   "teeth": False, "tongue": True},
 }
 
 
@@ -81,88 +83,105 @@ def _make_sprite(
     width: int,
     height: int,
     skin_tone: Tuple[int, int, int, int],
-    outline_color: Tuple[int, int, int, int] = (30, 15, 10, 255),
-    interior_color: Tuple[int, int, int, int] = (20, 10, 10, 230),
 ) -> Image.Image:
     """
-    Draw a single mouth sprite for the given phoneme.
+    Draw a layered cartoon mouth sprite for the given phoneme.
+    Layers (bottom→top): lip fill → cavity → teeth → tongue → lip outline.
     Returns an RGBA image with a transparent background.
     """
-    sprite = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(sprite)
+    img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
 
-    shape_cfg = PHONEME_SHAPES[phoneme]
-    openness = shape_cfg["openness"]
-    w_ratio = shape_cfg["width"]
-    shape = shape_cfg["shape"]
+    cfg = PHONEME_SHAPES[phoneme]
+    openness   = cfg["openness"]
+    w_ratio    = cfg["width"]
+    shape      = cfg["shape"]
+    show_teeth = cfg["teeth"]
+    show_tongue= cfg["tongue"]
 
     cx, cy = width // 2, height // 2
-    ow = int(width * w_ratio)  # mouth opening width
-    oh = int(height * openness) if openness > 0 else 2  # mouth opening height
 
-    # Outer lip boundary (always present)
-    lip_w = int(width * min(w_ratio + 0.08, 1.0))
-    lip_h = max(int(height * 0.20), 6)
-    lip_left = cx - lip_w // 2
-    lip_right = cx + lip_w // 2
-    lip_top = cy - lip_h // 2
-    lip_bot = cy + lip_h // 2
+    # Colour palette derived from mascot skin tone
+    r0, g0, b0 = skin_tone[0], skin_tone[1], skin_tone[2]
+    lip_fill   = (r0, g0, b0, 255)
+    lip_shadow = (max(0, r0 - 60), max(0, g0 - 60), max(0, b0 - 60), 255)
+    cavity_col = (18, 6, 4, 250)
+    teeth_col  = (245, 240, 228, 240)
+    tongue_col = (210, 82, 78, 230)
 
-    if shape == "pressed" or openness < 0.05:
-        # Closed / pressed lips — just the lip line
-        draw.ellipse(
-            [lip_left, lip_top, lip_right, lip_bot],
-            fill=skin_tone,
-            outline=outline_color,
-            width=2,
-        )
-        # Mouth line
-        draw.line(
-            [(lip_left + 4, cy), (lip_right - 4, cy)],
-            fill=outline_color,
-            width=2,
-        )
+    # ── Outer lip ellipse ───────────────────────────────────────────────
+    lw = int(width  * min(w_ratio + 0.14, 0.96))
+    lh = int(height * 0.62)
+    ll = cx - lw // 2
+    lr = cx + lw // 2
+    lt = cy - lh // 2
+    lb = cy + lh // 2
 
-    else:
-        left = cx - ow // 2
-        right = cx + ow // 2
-        top = cy - oh // 2
-        bot = cy + oh // 2
+    # 1. Filled skin-tone lip
+    d.ellipse([ll, lt, lr, lb], fill=lip_fill)
 
+    is_closed = openness < 0.04
+
+    if not is_closed:
+        ow = int(width  * w_ratio)
+        oh = int(height * openness)
+
+        # Cavity centre sits slightly below sprite centre (lower lip is fuller)
+        kcy = cy + max(int(lh * 0.07), 2)
+
+        # Size cavity geometry per phoneme shape
         if shape == "wide":
-            # Wide open with flat top (E sound, teeth showing)
-            draw.ellipse([left, top, right, bot], fill=interior_color, outline=outline_color, width=2)
-            # Suggest teeth with a light stripe near top
-            teeth_y = top + max(oh // 6, 2)
-            draw.rectangle([left + 2, top + 1, right - 2, teeth_y],
-                           fill=(220, 215, 210, 200))
+            cw = int(ow * 0.88); ch = int(oh * 0.78)
         elif shape == "round":
-            # Rounder, more circular (H/O sound)
-            r = min(ow, oh) // 2
-            draw.ellipse([cx - r, cy - r, cx + r, cy + r],
-                         fill=interior_color, outline=outline_color, width=2)
+            sz = int(min(ow, oh * 1.3) * 0.50)
+            cw = sz * 2; ch = int(sz * 1.5)
         elif shape == "narrow":
-            # Narrow vertical oval (G sound)
-            draw.ellipse([left + ow // 4, top, right - ow // 4, bot],
-                         fill=interior_color, outline=outline_color, width=2)
+            cw = int(ow * 0.52); ch = oh
         elif shape == "lip":
-            # Bottom lip slightly raised (F/V sound)
-            draw.ellipse([left, top + oh // 4, right, bot],
-                         fill=interior_color, outline=outline_color, width=2)
-        else:
-            # Default oval (A, C, D, H)
-            draw.ellipse([left, top, right, bot],
-                         fill=interior_color, outline=outline_color, width=2)
+            cw = int(ow * 0.65); ch = int(oh * 0.62)
+            kcy = cy - max(int(oh * 0.10), 1)
+        else:  # oval (A, C, D)
+            cw = int(ow * 0.82); ch = oh
 
-        # Lip surround
-        draw.ellipse([lip_left, lip_top, lip_right, lip_bot],
-                     fill=None, outline=skin_tone, width=3)
-        lower_top = min(top + oh, lip_bot)
-        lower_bot = max(lip_bot + max(oh // 3, 3), lower_top + 2)
-        draw.ellipse([lip_left, lower_top, lip_right, lower_bot],
-                     fill=None, outline=skin_tone, width=2)
+        # Clamp cavity strictly inside lip bounds
+        cl = max(cx - cw // 2, ll + 3)
+        cr = min(cx + cw // 2, lr - 3)
+        ct = max(kcy - ch // 2, lt + 3)
+        cb = min(kcy + ch // 2, lb - 3)
+        if cr - cl < 4: cr = cl + 4
+        if cb - ct < 4: cb = ct + 4
 
-    return sprite
+        ch_actual = cb - ct
+        cw_actual = cr - cl
+
+        # 2. Dark mouth cavity
+        d.ellipse([cl, ct, cr, cb], fill=cavity_col)
+
+        # 3. Upper teeth — cream ellipse covering top of cavity
+        if show_teeth and ch_actual > 10:
+            th = max(ch_actual // 4, 5)
+            d.ellipse([cl + 2, ct, cr - 2, ct + th * 2], fill=teeth_col)
+
+        # 4. Tongue — pink rounded shape at cavity bottom
+        if show_tongue and ch_actual > 16:
+            tw = int(cw_actual * 0.64)
+            ts = max(ch_actual // 3, 7)
+            td_top = max(cb - ts, ct + ch_actual // 2)
+            td_bot = min(cb, lb - 2)
+            if td_bot > td_top + 3:
+                d.ellipse(
+                    [cx - tw // 2, td_top, cx + tw // 2, td_bot],
+                    fill=tongue_col,
+                )
+
+    # 5. Re-draw lip outline on top of all layers
+    d.ellipse([ll, lt, lr, lb], fill=None, outline=lip_shadow, width=3)
+
+    # 6. Centre mouth crease (always visible)
+    crease_y = cy + 1
+    d.line([(ll + 10, crease_y), (lr - 10, crease_y)], fill=lip_shadow, width=2)
+
+    return img
 
 
 def generate_sprites(
@@ -205,7 +224,7 @@ def main():
     parser.add_argument("--out", default="sprites/", help="Output directory for sprites")
     parser.add_argument(
         "--region", nargs=4, type=int, metavar=("X", "Y", "W", "H"),
-        default=[200, 280, 112, 70],
+        default=[376, 615, 272, 110],
         help="Mouth region on the mascot image (x y w h). Default: 200 280 112 70"
     )
     parser.add_argument(

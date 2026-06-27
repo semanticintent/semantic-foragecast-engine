@@ -13,10 +13,10 @@ character:
   # Pixel bounding box on the mascot image where the mouth sprites are composited.
   # Run generate_sprites.py with --detect to auto-detect, or set manually.
   mouth_region:
-    x: 200   # left edge of mouth area on the mascot image
-    y: 280   # top edge
-    w: 112   # width
-    h: 70    # height
+    x: 376   # left edge of mouth area on the mascot image
+    y: 615   # top edge
+    w: 272   # width
+    h: 110   # height
 
 animation:
   fps: 24

@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 logger = logging.getLogger(__name__)
 
@@ -57,9 +57,11 @@ class SpriteCompositor:
         self.base_image: Optional[Image.Image] = None
         self.mouth_sprites: Dict[str, Image.Image] = {}
         self._beat_times: List[float] = []
+        self._lyric_font: Optional[ImageFont.FreeTypeFont] = None
 
         self._load_assets()
         self._index_beats()
+        self._load_font()
 
     # ------------------------------------------------------------------ #
     # Asset loading
@@ -103,6 +105,26 @@ class SpriteCompositor:
         """Cache beat times from prep data for fast lookup."""
         beats = self.prep_data.get("beats", {})
         self._beat_times = [float(t) for t in beats.get("beat_times", [])]
+
+    def _load_font(self):
+        """Load the best available system font for lyric rendering."""
+        candidates = [
+            "/System/Library/Fonts/SFNSRounded.ttf",
+            "/System/Library/Fonts/SFNS.ttf",
+            "/Library/Fonts/Arial Unicode.ttf",
+            "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        ]
+        font_size = max(int(self.height * 0.055), 24)
+        for path in candidates:
+            if os.path.exists(path):
+                try:
+                    self._lyric_font = ImageFont.truetype(path, font_size)
+                    logger.info("Lyric font: %s @ %dpx", path, font_size)
+                    return
+                except Exception:
+                    continue
+        self._lyric_font = ImageFont.load_default()
+        logger.warning("No system font found — using PIL default for lyrics")
 
     # ------------------------------------------------------------------ #
     # Per-frame logic
@@ -149,6 +171,44 @@ class SpriteCompositor:
             offset = 0
         return offset
 
+    def _get_word_at(self, timestamp: float) -> Optional[str]:
+        """Return the active lyric word at the given timestamp, or None."""
+        words = self.prep_data.get("timed_words", [])
+        if not words:
+            return None
+        active = None
+        for entry in words:
+            t = float(entry.get("time", entry.get("start", 0)))
+            if t <= timestamp:
+                active = entry.get("word", entry.get("text", ""))
+            else:
+                break
+        return active or None
+
+    def _render_lyric_overlay(self, frame: Image.Image, word: str):
+        """Draw the current lyric word centred near the bottom of the frame."""
+        if not word:
+            return
+        d = ImageDraw.Draw(frame)
+        font = self._lyric_font
+
+        # Measure text
+        bbox = d.textbbox((0, 0), word.upper(), font=font)
+        tw = bbox[2] - bbox[0]
+        th = bbox[3] - bbox[1]
+
+        pad_x, pad_y = int(tw * 0.18), int(th * 0.30)
+        x = (self.width - tw) // 2
+        y = int(self.height * 0.82)
+
+        # Pill background
+        pill = [x - pad_x, y - pad_y, x + tw + pad_x, y + th + pad_y]
+        d.rounded_rectangle(pill, radius=int(th * 0.4), fill=(0, 0, 0, 160))
+
+        # White text with subtle shadow
+        d.text((x + 2, y + 2), word.upper(), font=font, fill=(0, 0, 0, 120))
+        d.text((x, y), word.upper(), font=font, fill=(255, 255, 255, 240))
+
     def _render_frame(self, timestamp: float) -> Image.Image:
         """Render a single composited frame at the given timestamp."""
         # 1. Background
@@ -171,7 +231,14 @@ class SpriteCompositor:
             my = mascot_y + self.mouth_region["y"] + bob
             frame.paste(mouth_sprite, (mx, my), mouth_sprite)
 
-        return frame.convert("RGB")
+        rgb = frame.convert("RGB")
+
+        # 5. Lyric word overlay
+        word = self._get_word_at(timestamp)
+        if word:
+            self._render_lyric_overlay(rgb, word)
+
+        return rgb
 
     # ------------------------------------------------------------------ #
     # Sequence rendering
