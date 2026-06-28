@@ -26,7 +26,7 @@ import logging
 from typing import Tuple, Optional
 
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -216,21 +216,124 @@ def generate_sprites(
     return count
 
 
+# ------------------------------------------------------------------ #
+# V2: AI inpainting via local Stable Diffusion (MPS / Apple Silicon)
+# ------------------------------------------------------------------ #
+
+# Phoneme-specific prompts — describe the mouth shape for the model
+PHONEME_PROMPTS = {
+    "X": "simple cartoon mouth closed, thin smile line, solid orange background, flat vector art, no muzzle, no white patch, cute friendly",
+    "A": "simple cartoon mouth wide open showing small white teeth, solid orange background, flat vector art, cute friendly, no muzzle, no white fur",
+    "B": "simple cartoon lips pressed together, thin horizontal line, solid orange background, flat vector art, cute, no muzzle",
+    "C": "simple cartoon mouth open halfway, small white teeth, solid orange background, flat vector art, cute friendly, no muzzle",
+    "D": "simple cartoon mouth slightly open, tiny gap, solid orange background, flat vector art, cute, no muzzle, no white patch",
+    "E": "simple cartoon mouth wide open sideways, teeth showing, solid orange background, flat vector art, cute happy smile, no muzzle",
+    "F": "simple cartoon mouth small opening, lower lip down, solid orange background, flat vector art, cute, no muzzle",
+    "G": "simple cartoon mouth small round opening, solid orange background, flat vector art, cute friendly, no muzzle",
+    "H": "simple cartoon mouth round O shape open, small tongue, solid orange background, flat vector art, cute friendly, no muzzle",
+}
+
+NEGATIVE_PROMPT = (
+    "realistic, photo, 3d render, blurry, watermark, text, white muzzle, "
+    "white fur, white patch, panda, raccoon, two-tone, horror, blood, dripping, "
+    "scary, fangs, sharp teeth, dark teeth, deformed, ugly, extra limbs, low quality"
+)
+
+
+def generate_sprites_ai(
+    image_path: str,
+    out_dir: str,
+    region: Tuple[int, int, int, int],
+    model_id: str = "stable-diffusion-v1-5/stable-diffusion-inpainting",
+    steps: int = 25,
+    guidance: float = 7.5,
+    seed: int = 42,
+) -> int:
+    """
+    V2: Generate all 9 mouth sprites via SD inpainting on MPS.
+    Each phoneme gets a unique prompt describing the mouth shape.
+    Returns the number of sprites written.
+    """
+    try:
+        import torch
+        from diffusers import StableDiffusionInpaintPipeline
+    except ImportError:
+        raise ImportError("Run: pip install diffusers transformers accelerate torch torchvision")
+
+    os.makedirs(out_dir, exist_ok=True)
+    x, y, w, h = region
+    img_w, img_h = Image.open(image_path).size
+
+    # Work at 512×512 for SD 1.5
+    sd_size = 512
+    scale_x = sd_size / img_w
+    scale_y = sd_size / img_h
+    mx = int(x * scale_x); my = int(y * scale_y)
+    mw = int(w * scale_x); mh = int(h * scale_y)
+
+    # Elliptical mask — inpaint just the mouth opening, not the full rectangle
+    mask = Image.new("L", (sd_size, sd_size), 0)
+    inset_x, inset_y = mw // 10, mh // 10
+    ImageDraw.Draw(mask).ellipse(
+        [mx + inset_x, my + inset_y, mx + mw - inset_x, my + mh - inset_y],
+        fill=255
+    )
+    mask = mask.filter(ImageFilter.GaussianBlur(radius=4))
+
+    base_img = Image.open(image_path).convert("RGB").resize((sd_size, sd_size), Image.LANCZOS)
+
+    logger.info("Loading SD inpainting model: %s", model_id)
+    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    dtype = torch.float16 if device == "mps" else torch.float32
+    pipe = StableDiffusionInpaintPipeline.from_pretrained(model_id, torch_dtype=dtype)
+    pipe = pipe.to(device)
+    pipe.set_progress_bar_config(disable=True)
+    logger.info("Model loaded on %s", device)
+
+    count = 0
+    for phoneme, prompt in PHONEME_PROMPTS.items():
+        logger.info("  Generating phoneme %s ...", phoneme)
+        result = pipe(
+            prompt=prompt,
+            negative_prompt=NEGATIVE_PROMPT,
+            image=base_img,
+            mask_image=mask,
+            width=sd_size, height=sd_size,
+            num_inference_steps=steps,
+            guidance_scale=guidance,
+            generator=torch.Generator(device).manual_seed(seed + list(PHONEME_PROMPTS).index(phoneme)),
+        ).images[0]
+
+        # Crop just the mouth region and save as sprite
+        sprite = result.crop((mx, my, mx + mw, my + mh)).convert("RGBA")
+        out_path = os.path.join(out_dir, f"mouth_{phoneme}.png")
+        sprite.save(out_path, "PNG")
+        logger.info("  Wrote: %s (%dx%d)", out_path, sprite.width, sprite.height)
+        count += 1
+
+    logger.info("Generated %d AI sprites in %s", count, out_dir)
+    return count
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate geometric mouth sprites for the Semantic Foragecast Engine"
+        description="Generate mouth sprites for the Semantic Foragecast Engine"
     )
     parser.add_argument("--image", required=True, help="Path to mascot PNG")
     parser.add_argument("--out", default="sprites/", help="Output directory for sprites")
+    parser.add_argument("--mode", choices=["geometric", "ai"], default="geometric",
+                        help="geometric (V1, instant) or ai (V2, SD inpainting on MPS)")
     parser.add_argument(
         "--region", nargs=4, type=int, metavar=("X", "Y", "W", "H"),
         default=[376, 615, 272, 110],
-        help="Mouth region on the mascot image (x y w h). Default: 200 280 112 70"
+        help="Mouth region on the mascot image (x y w h)"
     )
     parser.add_argument(
         "--sample-point", nargs=2, type=int, metavar=("X", "Y"),
-        help="Specific pixel to sample skin tone from (overrides region centre)"
+        help="(geometric mode) Specific pixel to sample skin tone from"
     )
+    parser.add_argument("--steps", type=int, default=25, help="(ai mode) Inference steps")
+    parser.add_argument("--seed",  type=int, default=42,  help="(ai mode) Random seed")
 
     args = parser.parse_args()
 
@@ -239,12 +342,16 @@ def main():
         return 1
 
     region = tuple(args.region)
-    sample = tuple(args.sample_point) if args.sample_point else None
 
-    count = generate_sprites(args.image, args.out, region, sample)
+    if args.mode == "ai":
+        logger.info("Mode: AI inpainting (SD on MPS) — this takes ~30s per phoneme")
+        count = generate_sprites_ai(args.image, args.out, region,
+                                    steps=args.steps, seed=args.seed)
+    else:
+        sample = tuple(args.sample_point) if args.sample_point else None
+        count = generate_sprites(args.image, args.out, region, sample)
+
     logger.info("Done — %d sprites ready in %s", count, args.out)
-    logger.info("Next: update 'character.mouth_region' in config.yaml to match x=%d y=%d w=%d h=%d",
-                *region)
     return 0
 
 

@@ -223,13 +223,24 @@ class SpriteCompositor:
         # 3. Composite mascot onto background
         frame.paste(self.base_image, (mascot_x, mascot_y), self.base_image)
 
-        # 4. Composite mouth sprite at the configured mouth_region
+        # 4. Composite mouth sprite at the configured mouth_region (feathered edges)
         phoneme = self._get_phoneme_at(timestamp)
         mouth_sprite = self._get_mouth_sprite(phoneme)
         if mouth_sprite:
             mx = mascot_x + self.mouth_region["x"]
             my = mascot_y + self.mouth_region["y"] + bob
-            frame.paste(mouth_sprite, (mx, my), mouth_sprite)
+            # Build an elliptical feather mask so the sprite blends into the face
+            fw, fh = mouth_sprite.size
+            feather_mask = Image.new("L", (fw, fh), 0)
+            inset_x = max(fw // 8, 4)
+            inset_y = max(fh // 8, 4)
+            ImageDraw.Draw(feather_mask).ellipse(
+                [inset_x, inset_y, fw - inset_x, fh - inset_y], fill=255
+            )
+            feather_mask = feather_mask.filter(
+                ImageFilter.GaussianBlur(radius=max(min(inset_x, inset_y), 4))
+            )
+            frame.paste(mouth_sprite, (mx, my), feather_mask)
 
         rgb = frame.convert("RGB")
 
