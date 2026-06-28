@@ -1,0 +1,43 @@
+# Semantic Foragecast Engine — default configuration
+
+inputs:
+  mascot_image: examples/mascot_cat.png  # AI-generated cat mascot
+  song_file: examples/demo_song.wav      # WAV audio file
+  lyrics_file: examples/demo_lyrics.txt  # optional: timed lyrics (set to null to skip)
+
+character:
+  # Directory containing mouth_X.png through mouth_H.png (one per Rhubarb phoneme)
+  # Run: python generate_sprites.py --image examples/demo_fox.png --out sprites/
+  sprites_dir: sprites_cat/
+
+  # Pixel bounding box on the mascot image where the mouth sprites are composited.
+  # Run generate_sprites.py with --detect to auto-detect, or set manually.
+  mouth_region:
+    x: 155   # left edge of mouth area on the mascot image
+    y: 375   # top edge
+    w: 200   # width
+    h: 95    # height
+
+animation:
+  fps: 24
+  body_bob_px: 8         # vertical bob amplitude in pixels
+  body_bob_beats: true   # sync bob to detected beat times
+  background_color: [20, 15, 35]   # RGB background (dark stage)
+
+output:
+  output_dir: outputs/
+  frames_dir: outputs/frames/
+  prep_json: outputs/prep_data.json
+  video_name: foragecast_cat.mp4
+
+video:
+  fps: 24
+  resolution: [1280, 720]   # [width, height] in pixels
+  codec: libx264
+  # quality: ultra_fast | fast | medium | high | production
+  quality: medium
+
+rhubarb:
+  # Path to Rhubarb Lip Sync binary. Leave null to use the built-in mock.
+  # Download: https://github.com/DanielSWolf/rhubarb-lip-sync/releases
+  executable_path: null

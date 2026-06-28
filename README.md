@@ -117,11 +117,17 @@ Phase 2 expects 9 mouth sprite PNG files (transparent background, sized to fit `
 | `mouth_G.png` | G | Narrow open |
 | `mouth_H.png` | H | Open, round |
 
-Use `generate_sprites.py` to create a starter set from your mascot image automatically:
+`generate_sprites.py` supports two modes:
 
 ```bash
+# V1 — geometric: instant, zero GPU, skin-tone matched cartoon shapes
 python generate_sprites.py --image examples/demo_fox.png --out sprites/
+
+# V2 — AI: SD 1.5 inpainting on Apple MPS (~15s/phoneme, ~2.5 min total)
+python generate_sprites.py --image examples/demo_fox.png --out sprites/ --mode ai
 ```
+
+The AI mode uses `StableDiffusionInpaintPipeline` with an elliptical mask centred on the mouth region and phoneme-specific prompts. Sprites are feathered into the mascot face using a Gaussian ellipse mask at composite time.
 
 ---
 
@@ -133,17 +139,22 @@ semantic-foragecast-engine/
 ├── prep_audio.py            # Phase 1: audio analysis
 ├── compose_animation.py     # Phase 2: sprite compositor
 ├── export_video.py          # Phase 3: FFmpeg export
-├── generate_sprites.py      # Helper: generate starter mouth sprites
+├── generate_sprites.py      # Helper: geometric (V1) + AI inpainting (V2) sprites
 ├── examples/
-│   ├── demo_fox.png
+│   ├── demo_fox.png         # Built-in fox mascot (RGBA, transparent bg)
+│   ├── mascot_cat.png       # AI-generated cat mascot (SD 1.5 text-to-image)
 │   ├── demo_song.wav
 │   └── demo_lyrics.txt
-├── sprites/                 # Your mouth sprite PNGs go here
-├── config.yaml              # Default configuration
+├── sprites/                 # Fox mouth sprites (geometric or AI)
+├── sprites_cat/             # Cat mouth sprites
+├── config.yaml              # Fox pipeline configuration
+├── config_cat.yaml          # Cat pipeline configuration
 ├── requirements.txt
 ├── pyproject.toml
 └── tests/
     ├── test_prep_audio.py
+    ├── test_compose_animation.py
+    ├── test_generate_sprites.py
     ├── test_export_video.py
     └── test_e2e_pipeline.py
 ```
@@ -163,14 +174,26 @@ Phase 1 and Phase 3 have full test coverage. Phase 2 compositor tests require Pi
 
 ## Roadmap
 
-- [x] Phase 1: Audio analysis (LibROSA + Rhubarb)
-- [x] Phase 3: Video export (FFmpeg)
-- [x] Phase 2: Sprite compositor with beat-synced body motion
-- [ ] AI-generated mouth sprites (Flux/SDXL via local diffusion)
-- [ ] Lyric overlay rendering
-- [ ] Advanced stage effects (glow, particle bursts, colour grading)
-- [ ] Web UI for configuration
-- [ ] PyPI package
+### Shipped
+- [x] Phase 1: Audio analysis — LibROSA beat detection, Rhubarb phoneme timing, lyrics parsing
+- [x] Phase 2: Sprite compositor — phoneme-driven mouth swap, beat-synced body bob, feathered compositing
+- [x] Phase 3: Video export — FFmpeg MP4 with configurable codec and quality presets
+- [x] Geometric mouth sprites — V1, instant, skin-tone matched cartoon shapes (9 phonemes)
+- [x] AI mouth sprites — V2, SD 1.5 inpainting on Apple MPS, phoneme-specific prompts
+- [x] Lyric word overlay — per-word pill (SF Rounded font, drop shadow, beat-synced)
+- [x] Transparent mascot backgrounds — saturation + flood-fill alpha removal pipeline
+- [x] AI mascot generation — SD 1.5 text-to-image → background removal → full pipeline
+- [x] Multi-mascot support — config-based character swap (fox + cat demonstrated)
+- [x] Test suite — 40 tests across all pipeline phases (pytest + coverage)
+- [x] Docs site — [foragecast.semanticintent.dev](https://foragecast.semanticintent.dev) (React/Vite, Cloudflare Pages)
+
+### Next
+- [ ] Cartoon LoRA — fine-tuned SD model for cleaner AI mascot generation on first try
+- [ ] Real Rhubarb lip-sync — replace mock phoneme data with actual binary
+- [ ] Head/body split — separate mascot layers for independent head-bob vs body-bob
+- [ ] AI mouth sprites per character — cat, owl, and future mascots get V2 sprite sets
+- [ ] Stage effects — glow, colour grading, vignette, particle bursts on beat drops
+- [ ] PyPI package — `pip install semantic-foragecast-engine`
 
 ---
 
